@@ -1,0 +1,1052 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RevitStd</name>
+    </assembly>
+    <members>
+        <member name="T:RevitStd.Curves.ContiguousCurveChain">
+            <summary>
+            模拟一段从左向右的连续性曲线链集合，集合中的第一个元素表示最左边的曲线；end0 与 end1 分别代表整个连续曲线段的最左端点与最右端点。
+            </summary>
+        </member>
+        <member name="P:RevitStd.Curves.ContiguousCurveChain.Curves">
+            <summary> 连续性曲线链，此集合中的曲线肯定是首尾相连的。且第一个元素表示最左边的那条曲线。 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.ContiguousCurveChain.end0">
+            <summary> 整个连续性曲线链的最左端点的坐标 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.ContiguousCurveChain.end1">
+            <summary> 整个连续性曲线链的最右端点的坐标 </summary>
+        </member>
+        <member name="M:RevitStd.Curves.ContiguousCurveChain.#ctor(Autodesk.Revit.DB.Curve)">
+            <summary>
+            从一条曲线开始构造连续曲线链
+            </summary>
+            <param name="BaseCurve"></param>
+        </member>
+        <member name="M:RevitStd.Curves.ContiguousCurveChain.CheckForward(System.Collections.Generic.Dictionary{System.Int32,Autodesk.Revit.DB.Curve})">
+            <summary>
+            从一组曲线中找到一条与连续链右端点相接的曲线，并且在适当的情况下，对搜索到的曲线进行反转。
+            </summary>
+            <param name="curves">进行搜索的曲线集合。在此函数中，可能会对连接到的那条曲线进行反转。
+            IDictionary中的键值表示每一条Curve的Id值，这个值并不一定是从1开始递增的。
+            </param>
+            <returns>
+            与连续曲线链的最右端相连的那一条曲线在输入的曲线集合中所对应的Id键值。
+            如果没有找到连接的曲线，则返回Nothing！</returns>
+        </member>
+        <member name="M:RevitStd.Curves.ContiguousCurveChain.CheckBackward(System.Collections.Generic.Dictionary{System.Int32,Autodesk.Revit.DB.Curve})">
+            <summary>
+            从一组曲线中找到一条与连续链左端点相接的曲线，并且在适当的情况下，对搜索到的曲线进行反转。
+            </summary>
+            <param name="curves">进行搜索的曲线集合。在此函数中，可能会对连接到的那条曲线进行反转。
+            IDictionary中的键值表示每一条Curve的Id值，这个值并不一定是从1开始递增的。</param>
+            <returns>与连续曲线链的最右端相连的那一条曲线在输入的曲线集合中所对应的Id键值。
+            如果没有找到连接的曲线，则返回Nothing！</returns>
+        </member>
+        <member name="M:RevitStd.Curves.ContiguousCurveChain.ConnectForward(Autodesk.Revit.DB.Curve)">
+            <summary>
+            将曲线添加到连续曲线链的右端
+            </summary>
+            <param name="c">请自行确保添加的曲线是可以与当前的连续链首尾相接的。
+            如果不能确保，请通过CheckForward函数进行检测。</param>
+        </member>
+        <member name="M:RevitStd.Curves.ContiguousCurveChain.ConnectBackward(Autodesk.Revit.DB.Curve)">
+            <summary>
+            将曲线添加到连续曲线链的左端
+            </summary>
+            <param name="c">请自行确保添加的曲线是可以与当前的连续链首尾相接的。
+            如果不能确保，请通过CheckBackward函数进行检测。</param>
+        </member>
+        <member name="M:RevitStd.Curves.ContiguousCurveChain.FormatChain(System.Collections.Generic.IList{Autodesk.Revit.DB.Curve})">
+            <summary>
+            从指定的Curve集合中中，获得连续排列的多段曲线（不一定要封闭）。如果不连续，则返回Nothing。
+            </summary>
+            <param name="curves">多条曲线元素所对应的集合
+            注意，curves 集合中每一条曲线都必须是有界的（IsBound），否则，其 GetEndPoint 会报错。</param>
+            <returns>如果输入的曲线可以形成连续的多段线，则返回重新排序后的多段线集合；
+            如果输入的曲线不能形成连续的多段线，则返回 Nothing/ null ！</returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:RevitStd.Curves.CurvesConverter">
+            <summary>
+            对曲线集合的形式进行修改，但是不检查曲线集合是否连续或者共面等限制条件，如果出错，自行负责。
+            </summary>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesConverter.Convert(System.Collections.Generic.List{System.Collections.Generic.List{Autodesk.Revit.DB.Curve}},Autodesk.Revit.DB.CurveArrArray@)">
+            <summary>  </summary>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesConverter.Convert(System.Collections.Generic.List{System.Collections.Generic.List{Autodesk.Revit.DB.Curve}},System.Collections.Generic.List{Autodesk.Revit.DB.Curve}@)">
+            <summary>  </summary>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesConverter.Convert(Autodesk.Revit.DB.EdgeArrayArray,Autodesk.Revit.DB.Transform,System.Collections.Generic.List{System.Collections.Generic.List{Autodesk.Revit.DB.Curve}}@)">
+            <summary> 转换曲线集合的格式，并进行空间变换 </summary>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesConverter.Convert(Autodesk.Revit.DB.EdgeArrayArray,Autodesk.Revit.DB.Transform,System.Collections.Generic.List{Autodesk.Revit.DB.Curve}@)">
+            <summary> 转换曲线集合的格式，并进行空间变换 </summary>
+            <param name="transf"></param>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesConverter.Convert(Autodesk.Revit.DB.EdgeArrayArray,Autodesk.Revit.DB.Transform,Autodesk.Revit.DB.CurveArrArray@)">
+            <summary> 转换曲线集合的格式，并进行空间变换 </summary>
+        </member>
+        <member name="T:RevitStd.Curves.ClosedCurvesDrawer">
+            <summary>
+            绘制多重封闭的曲线
+            </summary>
+        </member>
+        <member name="T:RevitStd.Curves.ClosedCurvesDrawer.DrawingCompletedEventHandler">
+            <summary>
+            在模型线绘制完成时，触发此事件。
+            </summary>
+            <param name="addedCurves">添加的模型线</param>
+            <param name="finishedExternally">画笔是否是由外部程序强制关闭的。如果是外部对象通过调用Cancel方法来取消绘制的，则其值为 True。</param>
+            <param name="succeeded">AddedCurves集合中的曲线集合是否满足指定的连续性条件</param>
+        </member>
+        <member name="E:RevitStd.Curves.ClosedCurvesDrawer.ClosedDrawingCompleted">
+            <summary> 绘制封闭的模型线结束 </summary>
+        </member>
+        <member name="P:RevitStd.Curves.ClosedCurvesDrawer.CheckInTime">
+            <summary>
+            是否在每一步绘制时都检测所绘制的曲线是否符合指定的要求，如果为False，则在绘制操作退出后进行统一检测。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:RevitStd.Curves.ClosedCurvesDrawer._closedCurveDrawer">
+            <summary>
+            用来绘制封闭的模型线
+            </summary>
+        </member>
+        <member name="F:RevitStd.Curves.ClosedCurvesDrawer._addedModelCurvesId">
+            <summary>
+            已经绘制的所有模型线
+            </summary>
+        </member>
+        <member name="M:RevitStd.Curves.ClosedCurvesDrawer.#ctor(Autodesk.Revit.UI.UIApplication,System.Boolean,System.Collections.Generic.List{Autodesk.Revit.DB.ElementId})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="uiApp">进行模型线绘制的Revit程序</param>
+            <param name="CheckInTime">是否在每一步绘制时都检测所绘制的曲线是否符合指定的要求，如果为False，则在绘制操作退出后进行统一检测。</param>
+            <param name="BaseCurves">
+            在新绘制之前，先指定一组基准曲线集合，而新绘制的曲线将与基准曲线一起来进行连续性条件的检测。
+            </param>
+        </member>
+        <member name="M:RevitStd.Curves.ClosedCurvesDrawer.PostDraw">
+            <summary> 在UI界面中绘制模型线。此方法为异步操作，程序并不会等待 PostDraw 方法执行完成才继续向下执行。  </summary>
+        </member>
+        <member name="T:RevitStd.Curves.CurveCheckMode">
+            <summary>
+            曲线集合的检查模式
+            </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckMode.Seperated">
+            <summary>
+            所绘制的模型线并不要求相连，也就是不进行任何检测。
+            </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckMode.Connected">
+            <summary>
+            集合中的线条在整体上是连续的，但是线条之间的顺序可能是混乱的。
+            </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckMode.Closed">
+            <summary>
+            绘制一个封闭的曲线集合。集合中不能包含多个封闭曲线链
+            </summary>
+            <remarks>可以通过连续曲线链的左端点与右端点是否重合来判断</remarks>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckMode.HorizontalPlan">
+            <summary>
+            集合中的曲线在水平面上，但是并不一定是连续的。
+            </summary>
+        </member>
+        <member name="T:RevitStd.Curves.CurveCheckState">
+            <summary>
+            当前曲线集合在检测后的状态
+            </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckState.Invalid_Exit">
+            <summary> 当前的曲线不满足检查要求，而且不能撤消，而应该直接退出绘制 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckState.Invalid_Continue">
+            <summary> 当前的曲线还未满足检查要求，但是还可以继续绘制。
+            比如要求绘制一个封闭的曲线链，则在未封闭的过程中，只要其是连续的，就还可以继续绘制。 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckState.Invalid_InquireForUndo">
+            <summary> 当前的曲线不满足检查要求，然后应该通过询问用户是否是撤消或者重做 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckState.Valid_Exit">
+            <summary>
+            比如绘制一个封闭的曲线完成
+            </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckState.Valid_Continue">
+            <summary>
+            比如绘制连续曲线链时，在当前的连续链的基础上，还可以接着绘制
+            </summary>
+        </member>
+        <member name="F:RevitStd.Curves.CurveCheckState.Valid_InquireForContinue">
+            <summary>
+            比如在绘制有孔截面时，绘制好一个封闭曲线后，还可以继续绘制另一个封闭曲线，也可以不绘制了。
+            </summary>
+        </member>
+        <member name="T:RevitStd.Curves.CurvesFormator">
+            <summary>
+            判断曲线集合是否满足指定的格式，或者将集合中的曲线进行标准化，比如形成连续曲线，投影到同一个平面中等。
+            </summary>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.GetContiguousCurvesFromCurves(Autodesk.Revit.DB.CurveArray,System.Collections.Generic.IList{Autodesk.Revit.DB.Curve}@)">
+            <summary> 将 CurveArray 中的曲线进行重新排列，以组成连续的曲线链 </summary>
+            <param name="curveArr"> 要进行重组的曲线集合 </param>
+            <param name="contigeousCurves"> 如果不能形成连续的曲线链，则返回 null </param>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.GetContiguousCurvesFromCurves(Autodesk.Revit.DB.CurveArray,Autodesk.Revit.DB.CurveArray@)">
+            <summary> 将 CurveArray 中的曲线进行重新排列，以组成连续的曲线链 </summary>
+            <param name="curveArr"> 要进行重组的曲线集合 </param>
+            <param name="contigeousCurves"> 如果不能形成连续的曲线链，则返回 null，从外部调用来看，此参数可以与第一个参数curveArr赋同一个实参。 </param>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.GetContiguousCurvesFromCurves(Autodesk.Revit.DB.CurveArrArray,Autodesk.Revit.DB.CurveArrArray@)">
+            <summary> 将 CurveArray 中的曲线进行重新排列，以组成连续的曲线链 </summary>
+            <param name="curveArr"> 要进行重组的曲线集合 </param>
+            <param name="contigeousCurves"> 如果不能形成连续的曲线链，则返回 null </param>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.GetContiguousCurvesFromCurves(Autodesk.Revit.DB.Document,System.Collections.Generic.IList{Autodesk.Revit.DB.Reference})">
+            <summary>
+            从选择的Curve Elements中，获得连续排列的多段曲线（不一定要封闭）。
+            </summary>
+            <param name="doc">曲线所在文档</param>
+            <param name="SelectedCurves">多条曲线元素所对应的Reference，可以通过Selection.PickObjects返回。
+            注意，SelectedCurves中每一条曲线都必须是有界的（IsBound），否则，其GetEndPoint会报错。</param>
+            <returns>如果输入的曲线可以形成连续的多段线，则返回重新排序后的多段线集合；
+            如果输入的曲线不能形成连续的多段线，则返回Nothing！</returns>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.GetContiguousCurvesFromCurves(System.Collections.Generic.IList{Autodesk.Revit.DB.Curve})">
+            <summary>
+            从指定的Curve集合中中，获得连续排列的多段曲线（不一定要封闭）。如果不连续，则返回Nothing。
+            </summary>
+            <param name="curves">多条曲线元素所对应的集合
+            注意，curves 集合中每一条曲线都必须是有界的（IsBound），否则，其 GetEndPoint 会报错。</param>
+            <returns>如果输入的曲线可以形成连续的多段线，则返回重新排序后的多段线集合；
+            如果输入的曲线不能形成连续的多段线，则返回Nothing！</returns>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.IsInOnePlan(System.Collections.Generic.IList{Autodesk.Revit.DB.Curve})">
+            <summary>
+            曲线集合在同一个平面上，而不限定是哪一个法向的平面
+            </summary>
+            <param name="curves"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.IsInOnePlan(System.Collections.Generic.ICollection{Autodesk.Revit.DB.Curve},Autodesk.Revit.DB.XYZ)">
+            <summary>
+            曲线集合中的所有曲线是否在指定法向的平面上
+            </summary>
+            <param name="curves"></param>
+            <param name="planNormal">指定平面的法向向量</param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.Curves.CurvesFormator.InPlan(Autodesk.Revit.DB.Curve,Autodesk.Revit.DB.XYZ)">
+            <summary>
+            指定的曲线是否位于指定的平面内。
+            </summary>
+            <param name="c"></param>
+            <param name="planNormal"></param>
+            <returns>空间三维曲线可能并不会在任何一个平面内，此时其自然是返回False。</returns>
+        </member>
+        <member name="T:RevitStd.Curves.ModelCurvesDrawer">
+            <summary>
+            在UI界面中按指定的要求绘制模型线，并将这些模型线保存在对应的列表中。
+            在绘制完成后，必须手动执行 Dispose 方法，以清空数据，以及取消事件的关联。
+            </summary>
+        </member>
+        <member name="T:RevitStd.Curves.ModelCurvesDrawer.DrawingCompletedEventHandler">
+            <summary>
+            在模型线绘制完成时，触发此事件。
+            </summary>
+            <param name="addedCurves">添加的模型线</param>
+            <param name="finishedExternally">画笔是否是由外部程序强制关闭的。如果是外部对象通过调用Cancel方法来取消绘制的，则其值为 True。</param>
+            <param name="succeeded">AddedCurves集合中的曲线集合是否满足指定的连续性条件</param>
+        </member>
+        <member name="F:RevitStd.Curves.ModelCurvesDrawer._event_DrawingCompletedEvent">
+            <summary> 在一般模型线绘制完成时触发 </summary>
+        </member>
+        <member name="E:RevitStd.Curves.ModelCurvesDrawer.DrawingCompleted">
+            <summary> 在一般模型线绘制完成时触发 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.ModelCurvesDrawer.CurvesState.Invalid">
+            <summary> 当前的曲线不满足检查要求，应该退出或者撤消绘制 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.ModelCurvesDrawer.CurvesState.Validating">
+            <summary> 当前的曲线还未满足检查要求，但是还可以继续绘制。
+            比如要求绘制一个封闭的曲线链，则在未封闭的过程中，只要其是连续的，就还可以继续绘制。 </summary>
+        </member>
+        <member name="F:RevitStd.Curves.ModelCurvesDrawer.CurvesState.Validated">
+            <summary> 当前的曲线已经满足了指定的要求，但此时并不一定要退出。 </summary>
+        </member>
+        <member name="P:RevitStd.Curves.ModelCurvesDrawer.CheckMode">
+            <summary>
+            所绘制的曲线要符合何种连续性条件
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RevitStd.Curves.ModelCurvesDrawer.CheckInTime">
+            <summary>
+            是否在每一步绘制时都检测所绘制的曲线是否符合指定的要求，如果为False，则在绘制操作退出后进行统一检测。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RevitStd.Curves.ModelCurvesDrawer.IsBeenUsed">
+            <summary> 模型线绘制器是否正在使用中。
+            注意：每次只能有一个实例正在绘制曲线。</summary>
+        </member>
+        <member name="F:RevitStd.Curves.ModelCurvesDrawer.AddedModelCurvesId">
+            <summary>
+            已经绘制的所有模型线
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.#ctor(Autodesk.Revit.UI.UIApplication,RevitStd.Curves.CurveCheckMode,System.Boolean,System.Collections.Generic.List{Autodesk.Revit.DB.ElementId})">
+            <summary>
+            构造函数
+            </summary>
+            <param name="uiApp">进行模型线绘制的Revit程序</param>
+            <param name="CheckMode">所绘制的曲线要符合何种连续性条件</param>
+            <param name="CheckInTime">是否在每一步绘制时都检测所绘制的曲线是否符合指定的要求，如果为False，则在绘制操作退出后进行统一检测。</param>
+            <param name="BaseCurves">
+            在新绘制之前，先指定一组基准曲线集合，而新绘制的曲线将与基准曲线一起来进行连续性条件的检测。
+            </param>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.PostDraw">
+            <summary>
+            在UI界面中绘制模型线。此方法为异步操作，程序并不会等待 PostDraw 方法执行完成才继续向下执行。
+            </summary>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.CancelExternally">
+            <summary>
+            外部强行取消模型线的绘制，由于外部并不知道当前的模型线是否符合要求，所以要最后检查一次
+            </summary>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.FinishOnce(System.Boolean,System.Boolean)">
+            <summary>
+            在模型绘制过程中自行判断，判断结果为绘制完成，此时关闭绘制模式
+            </summary>
+            <param name="finishedExternally">画笔是否是由外部程序强制关闭的。如果是外部对象通过调用Cancel方法来取消绘制的，则其值为 True。</param>
+            <param name="succeeded">AddedModelCurves 集合中的曲线集合是否满足指定的连续性条件</param>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.Dispose">
+            <summary> 停止所有的绘制操作，并清除内存 </summary>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.app_DocumentChanged(System.Object,Autodesk.Revit.DB.Events.DocumentChangedEventArgs)">
+            <summary>
+            DocumentChanged事件，并针对不同的绘制情况而进行不同的处理
+            </summary>
+            <param name="sender">Application对象</param>
+            <param name="e"></param>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.ActiveDraw">
+            <summary>
+            启动绘图操作
+            </summary>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.DeactiveDraw">
+            <summary>
+            绘图结束后的操作。注意，此操作必须要放在Messagebox.Show（或者是其他通过ESC键就可以对窗口进行某些操作的情况，
+            比如关闭窗口等）之后。如果放在Messagebox.Show之前，则会模拟通过按下ESC键而将模态窗口关闭的操作，则模态窗口就只
+            会闪现一下，或者根本就看不见。
+            </summary>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.ValidateCurves(System.Collections.Generic.List{Autodesk.Revit.DB.ElementId},System.Boolean@)">
+            <summary>
+            检测当前集合中的曲线是否符合指定的连续性要求
+            </summary>
+            <param name="curveIds">被检验的模型线集合</param>
+            <param name="continueDraw">在检查连续性后是否要继续绘制</param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.RefreshUiAfterValidation(RevitStd.Curves.ModelCurvesDrawer.CurvesState,System.Boolean)">
+            <summary>
+            根据当前曲线的连续性状态，以及是否可以继续绘制，来作出相应的UI更新
+            </summary>
+            <param name="cs"></param>
+            <param name="continueDraw"></param>
+        </member>
+        <member name="M:RevitStd.Curves.ModelCurvesDrawer.InquireUndo">
+            <summary> 询问用户是否要撤消操作 </summary>
+        </member>
+        <member name="T:RevitStd.Selector.Selector">
+            <summary> Revit界面的选择器，会触发 uidoc.Selection.PickObject()等方法 </summary>
+        </member>
+        <member name="M:RevitStd.Selector.Selector.SelectGeneralElement``1(Autodesk.Revit.UI.UIDocument,``0@,System.String)">
+            <summary> 选择一个对象 </summary>
+            <param name="uidoc"></param>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+            <param name="selectedElement">最后选择的 Element 对象，如果未正确地选择到平面，则此值为 null</param>
+            <param name="statusPrompt">在UI中选择时要在状态栏中显示的提示文字</param>
+            <returns>选择到的几何对象，如果未正常选择，则返回 null </returns>
+        </member>
+        <member name="M:RevitStd.Selector.Selector.SelectGeneralElements``1(Autodesk.Revit.UI.UIDocument,System.Collections.Generic.List{``0}@,System.String)">
+            <summary> 选择一组对象 </summary>
+            <param name="uidoc"></param>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+            <param name="selectedElements">最后选择的 Element 对象，如果未正确地选择到平面，则此集合中的元素个数为0</param>
+            <param name="statusPrompt">在UI中选择时要在状态栏中显示的提示文字</param>
+            <returns>选择到的几何对象，如果未正常选择，则此集合中的元素个数为0 </returns>
+        </member>
+        <member name="M:RevitStd.Selector.Selector.SelectFace``1(Autodesk.Revit.UI.UIDocument,``0@,Autodesk.Revit.DB.Face@,System.String)">
+            <summary> 选择一个任意形状的面 </summary>
+            <param name="uidoc"></param>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+            <param name="selectedElement">最后选择的 Element 对象，如果未正确地选择到平面，则此值为 null</param>
+            <param name="selectedFace">最后选择的 平面 对象，如果未正确地选择到平面，则此值为 null</param>
+            <param name="statusPrompt">在UI中选择时要在状态栏中显示的提示文字</param>
+            <returns>选择到的几何对象，如果未正常选择，则返回 null </returns>
+            <remarks>
+            	如果此FamilyInstance. HasModifiedGeometry() 返回False，
+            则Element .GetGeometryObjectFromReference(reference对象) 所返回的 Face或Edge对象是
+            此 FamilyInstance 所对应的族类型中的基准对象，后期必须要通过FamilyInstance.GetTransform() 
+            提取到此 FamilyInstance 的Transform后，再将此 Transform 应用到返回的 Face或Edge对象上，
+            才能得到位于项目坐标系中的实际对象。</remarks>
+        </member>
+        <member name="M:RevitStd.Selector.Selector.SelectPlanarFace``1(Autodesk.Revit.UI.UIDocument,``0@,Autodesk.Revit.DB.PlanarFace@,System.String)">
+            <summary> 选择一个平面 </summary>
+            <param name="uidoc"></param>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+            <param name="selectedElement">最后选择的 Element 对象，如果未正确地选择到平面，则此值为 null</param>
+            <param name="selectedFace">最后选择的 平面 对象，如果未正确地选择到平面，则此值为 null</param>
+            <param name="statusPrompt">在UI中选择时要在状态栏中显示的提示文字</param>
+            <returns>选择到的几何对象，如果未正常选择，则返回 null </returns>
+            <remarks>
+            	如果此FamilyInstance. HasModifiedGeometry() 返回False，
+            则Element .GetGeometryObjectFromReference(reference对象) 所返回的 Face或Edge对象是
+            此 FamilyInstance 所对应的族类型中的基准对象，后期必须要通过FamilyInstance.GetTransform() 
+            提取到此 FamilyInstance 的Transform后，再将此 Transform 应用到返回的 Face或Edge对象上，
+            才能得到位于项目坐标系中的实际对象。</remarks>
+        </member>
+        <member name="M:RevitStd.Selector.Selector.SelectHorizontalPlanFace``1(Autodesk.Revit.UI.UIDocument,``0@,Autodesk.Revit.DB.PlanarFace@,System.String)">
+            <summary> 选择一个法向为竖直方向平面 </summary>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+            <param name="uidoc"></param>
+            <param name="selectedElement">最后选择的 Element 对象，如果未正确地选择到平面，则此值为 null</param>
+            <param name="selectedFace">最后选择的 平面 对象，如果未正确地选择到平面，则此值为 null</param>
+            <param name="statusPrompt">在UI中选择时要在状态栏中显示的提示文字</param>
+            <returns>选择到的几何对象，如果未正常选择，则返回 null </returns>
+            <remarks>
+            	如果此FamilyInstance. HasModifiedGeometry() 返回False，
+            则Element .GetGeometryObjectFromReference(reference对象) 所返回的 Face或Edge对象是
+            此 FamilyInstance 所对应的族类型中的基准对象，后期必须要通过FamilyInstance.GetTransform() 
+            提取到此 FamilyInstance 的Transform后，再将此 Transform 应用到返回的 Face或Edge对象上，
+            才能得到位于项目坐标系中的实际对象。</remarks>
+        </member>
+        <member name="T:RevitStd.Selector.ClosedCurveSelector">
+            <summary>
+            在Revit界面中选择出多个封闭的模型线
+            </summary>
+        </member>
+        <member name="F:RevitStd.Selector.ClosedCurveSelector._multipleClosed">
+            <summary>
+            是否要分次选择多个封闭的模型曲线链
+            </summary>
+        </member>
+        <member name="M:RevitStd.Selector.ClosedCurveSelector.#ctor(Autodesk.Revit.UI.UIDocument,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="uiDoc">进行模型线选择的那个文档</param>
+            <param name="multiple"> 是否要分次选择多个封闭的模型曲线链</param>
+        </member>
+        <member name="M:RevitStd.Selector.ClosedCurveSelector.SendSelect(System.Collections.Generic.List{System.Collections.Generic.List{Autodesk.Revit.DB.ModelCurve}}@)">
+            <summary>
+            开启同步操作：在Revit UI 界面中选择封闭的模型曲线链
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.Selector.ClosedCurveSelector.GetLoopedCurve(System.Collections.Generic.List{Autodesk.Revit.DB.ModelCurve}@)">
+            <summary>
+            获取一组连续封闭的模型线
+            </summary>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="T:RevitStd.Geometry.SurfaceTriangulator">
+            <summary> 将任意曲面转换为平面网格集合 </summary>
+        </member>
+        <member name="M:RevitStd.Geometry.SurfaceTriangulator.#ctor(Autodesk.Revit.DB.Face,Autodesk.Revit.DB.Transform)">
+            <summary> 构造函数 </summary>
+            <param name="pickedFace">要进行转换的任意形态的曲面</param>
+            <param name="transform">此曲面从其定义的空间位置（比如族空间）到希望的目标位置（比如模型空间）的变换矩阵</param>
+        </member>
+        <member name="M:RevitStd.Geometry.SurfaceTriangulator.GetMesh">
+            <summary>
+            返回 项目中的face所对应的Mesh（其定位也是位于项目中）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:RevitStd.SelectionFilter.GeneralElementFilter`1">
+            <summary>
+            一般化的 Element 选择器：限定了 Element 的类型
+            </summary>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+        </member>
+        <member name="M:RevitStd.SelectionFilter.GeneralElementFilter`1.#ctor(Autodesk.Revit.UI.UIDocument)">
+            <summary> 构造函数 </summary>
+            <param name="uiDoc"></param>
+        </member>
+        <member name="T:RevitStd.SelectionFilter.GeneralGeometryFilter`2">
+            <summary>
+            一般化的 Geometry 选择器：限定了 Element 与 Reference 的类型
+            </summary>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+            <typeparam name="TGeometry">要过滤的几何类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.GeometryObject"/>类</typeparam>
+        </member>
+        <member name="M:RevitStd.SelectionFilter.GeneralGeometryFilter`2.#ctor(Autodesk.Revit.UI.UIDocument)">
+            <summary> 构造函数 </summary>
+            <param name="uiDoc"></param>
+        </member>
+        <member name="T:RevitStd.SelectionFilter.HorizontalPlanarFaceFilter`1">
+            <summary>
+            一般化的选择器：限定了 Element 与 Reference 的类型
+            </summary>
+            <typeparam name="TElement">要过滤的 Element 类型，此类型必须要继承自<see cref="T:Autodesk.Revit.DB.Element"/>类</typeparam>
+        </member>
+        <member name="M:RevitStd.SelectionFilter.HorizontalPlanarFaceFilter`1.#ctor(Autodesk.Revit.UI.UIDocument)">
+            <summary> 构造函数 </summary>
+            <param name="uiDoc"></param>
+        </member>
+        <member name="T:RevitStd.AddinFile">
+            <summary>
+            Revit 插件的 .Addin 文件
+            </summary>
+        </member>
+        <member name="M:RevitStd.AddinFile.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="filePath"></param>
+        </member>
+        <member name="M:RevitStd.AddinFile.ExtendAssemblyToAbsolutePath(System.String,System.String)">
+            <summary>
+            将 Addin 文件所记录的AddIn中，指定 clientId 的插件的 Assembly 字段的值修改为某指定的dll的绝对地址。
+            </summary>
+            <param name="absolutePath"></param>
+            <param name="clientId"> 表示 GUID 值的字段串，指将匹配 ClientId 的addin项的Assembly字段进行修改；
+            如果不指定此参数，则为此Addin文件中所有的Assembly字段的值都修改为此指定的 absolutePath。 </param>
+        </member>
+        <member name="M:RevitStd.AddinFile.SaveTo(System.String)">
+            <summary>
+            将内存中的 XMLDocument 文件保存到硬盘文件中。
+            </summary>
+            <param name="destinationPath"></param>
+        </member>
+        <member name="T:RevitStd.ExtensionMethods">
+            <summary>
+            Revit中对象的扩展方法
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:RevitStd.ExtensionMethods.Element(Autodesk.Revit.DB.ElementId,Autodesk.Revit.DB.Document)">
+            <summary> 从ElementId返回其所在的Document中的Element对象 </summary>
+            <param name="elementId"></param>
+            <param name="Doc">此elementId所位于的文档</param>
+        </member>
+        <member name="M:RevitStd.ExtensionMethods.ReName(Autodesk.Revit.DB.Family,System.String)">
+            <summary> 对Document中加载的族进行重命名 </summary>
+            <param name="Family"></param>
+            <param name="NewName">要重新命名的新名称</param>
+        </member>
+        <member name="M:RevitStd.ExtensionMethods.ToString_Matrix(Autodesk.Revit.DB.Transform)">
+            <summary> 以矩阵的形式返回变换矩阵，仅作显示之用 </summary>
+            <param name="Trans"></param>
+        </member>
+        <member name="M:RevitStd.ExtensionMethods.Foot2mm(System.Double)">
+            <summary> 长度单位转换：将英尺转换为毫米 1英尺=304.8mm </summary>
+            <param name="value_foot"></param>
+            <remarks> 1 foot = 12 inches = 304.8 mm</remarks>
+        </member>
+        <member name="T:RevitStd.GeoHelper">
+            <summary>
+            A object to help locating with geometry data.
+            </summary>
+        </member>
+        <member name="F:RevitStd.GeoHelper.VertexTolerance">
+            <summary>
+            进行点的距离比较时的容差。
+            Revit中，Application.VertexTolerance 属性值返回的值为：0.0005233832795，
+            也就是说，如果两个点的距离小于这个值，就认为这两个点是重合的。
+            </summary>
+        </member>
+        <member name="F:RevitStd.GeoHelper.AngleTolerance">
+            <summary>
+            进行点的距离比较时的容差。
+            Revit中，Application.AngleTolerance 属性值返回的值为：0.00174532925199433，
+            也就是说，如果两个角度的区别小于这个值，就认为这两个角度是相同的的。
+            Two angle measurements closer than this value are considered identical.
+            </summary>
+        </member>
+        <member name="M:RevitStd.GeoHelper.Distribute(Autodesk.Revit.DB.Mesh,Autodesk.Revit.DB.XYZ@,Autodesk.Revit.DB.XYZ@,Autodesk.Revit.DB.XYZ@)">
+            <summary>
+            Find out the three points which made of a plane.
+            </summary>
+            <param name="mesh">A mesh contains many points.</param>
+            <param name="startPoint">Create a new instance of ReferencePlane.</param>
+            <param name="endPoint">The free end apply to reference plane.</param>
+            <param name="thirdPnt">A third point needed to define the reference plane.</param>
+        </member>
+        <member name="M:RevitStd.GeoHelper.IsPointOnPlane(Autodesk.Revit.DB.XYZ,Autodesk.Revit.DB.Plane)">
+            <summary>
+            判断一个三维点是否在指定的平面上
+            </summary>
+            <param name="p1"></param>
+            <param name="plane"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.IsPointOnPlane(Autodesk.Revit.DB.XYZ,Autodesk.Revit.DB.ReferencePlane)">
+            <summary>
+            判断一个三维点是否在指定的参考平面上
+            </summary>
+            <param name="p1"></param>
+            <param name="plane">参考平面，ReferencePlane.GetPlane方法也可以返回Plane对象。</param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.IsSameDirection(Autodesk.Revit.DB.XYZ,Autodesk.Revit.DB.XYZ)">
+            <summary> 判断两个方向向量是否指向同一个方向（不包括方向相反的情况） </summary>
+            <param name="vectorA">The vector A.</param>
+            <param name="vectorB">The vector B.</param>
+        </member>
+        <member name="M:RevitStd.GeoHelper.IsAlmostEqualTo(Autodesk.Revit.DB.XYZ,Autodesk.Revit.DB.XYZ,System.Double)">
+            <summary> 比较两个点之间的距离是否小于指定的容差 </summary>
+            <remarks>对于Revit中的XYZ对象，其也有一个IsAlmostEqualTo函数，但是要注意，
+            那个函数是用来比较两个向量的方向是否小于指定的弧度容差。</remarks>
+        </member>
+        <member name="M:RevitStd.GeoHelper.GetLength(Autodesk.Revit.DB.XYZ,Autodesk.Revit.DB.XYZ)">
+            <summary>
+            Calculate the length between two points.
+            </summary>
+            <param name="startPoint">The start point.</param>
+            <param name="endPoint">The end point.</param>
+            <returns>The length between two points.</returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.GetDistance(System.Double,System.Double)">
+            <summary>
+            The distance between two value in a same axis.
+            </summary>
+            <param name="start">start value.</param>
+            <param name="end">end value.</param>
+            <returns>The distance between two value.</returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.GetVector(Autodesk.Revit.DB.XYZ,Autodesk.Revit.DB.XYZ)">
+            <summary>
+            Get the vector between two points.
+            </summary>
+            <param name="startPoint">The start point.</param>
+            <param name="endPoint">The end point.</param>
+            <returns>The vector between two points.</returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.DrawModelCurves(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.Document,System.Collections.Generic.IEnumerable{Autodesk.Revit.DB.Curve},Autodesk.Revit.DB.SketchPlane)">
+            <summary>
+            在指定的平面上绘制一组模型线
+            </summary>
+            <param name="tranDoc"></param>
+            <param name="doc"></param>
+            <param name="curves">请自行确保集合中的所有曲线都在同一个平面上</param>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.GetCurvesEnd(System.Collections.Generic.IEnumerable{Autodesk.Revit.DB.Curve})">
+            <summary> 查看曲线集合中每一条曲线的端点坐标 </summary>
+            <param name="curves"> 要查看端点坐标的曲线集合 </param>
+            <returns>用来进行Messagebox.Show或者Debug.Print的字符串。</returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.GetSolidsInModel(Autodesk.Revit.DB.Element,RevitStd.GeoHelper.SolidVolumnConstraint)">
+            <summary>
+            获取一个单元中的所有体积大于 0 的实体对象（坐标为相对于单元所在的模型空间）
+            </summary>
+            <param name="elem"></param>
+            
+            <returns>一个键值对字典，其中键表示element 中的实体对象，值指示此Solid是此 Element 所特有的（true），
+            还是对于此element 所属的族的Solid进行“索引+变换”后的结果（false）。
+            换句话说，true表示此 Element 是被切割过的，false表示此 Element 是被未被切割过的。
+            但是要注意，不论Solid所对应的值为true还是false，此solid的位置都是与项目中的element所在的位置相一致的。</returns>
+            
+            <remarks>但是要注意，不论Solid所对应的值为true还是false，此solid的位置都是与项目中的element所在的位置相一致的。</remarks>
+        </member>
+        <member name="T:RevitStd.GeoHelper.SolidVolumnConstraint">
+            <summary>
+            对于Solid对象的体积的限制（即对实体类型的限制）
+            </summary>
+        </member>
+        <member name="F:RevitStd.GeoHelper.SolidVolumnConstraint.Positive">
+            <summary> 体积大于0（不能等于0）的Solid即是一般的实体，它是由多个Face所围成的封闭的区域。 </summary>
+        </member>
+        <member name="F:RevitStd.GeoHelper.SolidVolumnConstraint.Negative">
+            <summary>
+                体积小于等于等于0。在Revit中，可以有不封闭的曲面对象，此面不属于任何Solid。但是在API中索引时，
+             这种面也必须通过Solid.Faces才能索引到的，这种情况下的Solid的体积是小于0的。
+                另外，对于空心（void）实体，其体积为负，而表面积 SurfaceArea 为正；
+            </summary>
+        </member>
+        <member name="F:RevitStd.GeoHelper.SolidVolumnConstraint.Any">
+            <summary> 体积大于0或者小于0都可以 </summary>
+        </member>
+        <member name="M:RevitStd.GeoHelper.GetSolidsInModel(System.Collections.Generic.IList{Autodesk.Revit.DB.GeometryObject},RevitStd.GeoHelper.SolidVolumnConstraint)">
+            <summary>
+            获取一个单元中的所有体积大于 0 的实体对象（坐标为相对于单元所在的模型空间）
+            </summary>
+            <param name="geoElem"></param>
+            <param name="solidVolumnConstraint"></param>
+            
+            <returns>一个键值对字典，其中键表示element 中的实体对象，值指示此Solid是此 Element 所特有的（true），
+            还是对于此element 所属的族的Solid进行“索引+变换”后的结果（false）。
+            换句话说，true表示此 Element 是被切割过的，false表示此 Element 是被未被切割过的。
+            但是要注意，不论Solid所对应的值为true还是false，此solid的位置都是与项目中的element所在的位置相一致的。</returns>
+            
+            <remarks>但是要注意，不论Solid所对应的值为true还是false，此solid的位置都是与项目中的element所在的位置相一致的。</remarks>
+        </member>
+        <member name="M:RevitStd.GeoHelper.GetSurfaces(System.Collections.Generic.IEnumerable{Autodesk.Revit.DB.Solid})">
+            <summary>
+            获取 Solid 集合（Solid的体积不一定都大于等于0）中所有面积大于0 的 Face 对象
+            </summary>
+            <param name="solids">Solid的体积不一定都大于等于0，在Revit中，可以有不封闭的曲面对象，此面不属于任何Solid。但是在API中索引时，这种面也必须通过Solid.Faces才能索引到的，这种情况下的Solid的体积是小于0的。</param>
+            <returns> 返回的Face集合中的面都是位于实体的表面的面 </returns>
+        </member>
+        <member name="M:RevitStd.GeoHelper.FindFace(Autodesk.Revit.DB.Extrusion,Autodesk.Revit.DB.XYZ,Autodesk.Revit.DB.ReferencePlane)">
+            <summary>
+            找到Extrusion中指定法向的平面。如果有多个平面的法向都是指定的法向，则返回第一个找到的平面。
+            Given a solid, find a planar face with the given normal (version 2)
+            this is a slightly enhanced version which checks if the face is on the given reference plane.
+            </summary>
+            <param name="refPlane">除了验证平面的法向外，还可以额外验证一下指定法向的平面是否是在指定的参考平面上。即要同时满足normal与ReferencePlane两个条件。
+            additionally, we want to check if the face is on the reference plane</param>
+            <remarks></remarks>
+        </member>
+        <member name="M:RevitStd.PostEvent.Main">
+            <summary>
+            应用程序的主入口点。
+            </summary>
+        </member>
+        <member name="M:RevitStd.PostEvent.ChangeAndMoveAddinFile(System.String,System.String,System.String,System.String)">
+            <summary>
+            修改addin文件中的Assembly字段为对应插件的dll的绝对路径，再将此addin文件添加到Revit的插件安装目录中。
+            </summary>
+            <param name="addinFilePath">安装包中的插件注册的 .addin 文件的绝对路径</param>
+            <param name="externalApplicationDllPath">安装包中插件的 .dll 文件的绝对路径，用来作为修改后的 .addin文件中的Assembly字段的值</param>
+            <param name="revitAddinPath"> Revit的插件目录，比如 "C:\ProgramData\Autodesk\Revit\Addins\2016" </param>
+            <param name="externalApplicationGuid">对 .addin 文件中的 匹配的 ClientId 所对应的子插件进行路径的修改。
+            如果不指定此参数，则会将addin文件中所有的子插件的Assembly字段都修改为这一个绝对路径。</param>
+        </member>
+        <member name="T:RevitStd.Tests_Templates.classTemplate">
+            <summary>
+            一个基本的类的模板
+            </summary>
+        </member>
+        <member name="F:RevitStd.Tests_Templates.classTemplate.Tfiled">
+            <summary>
+            字段模板
+            </summary>
+        </member>
+        <member name="F:RevitStd.Tests_Templates.classTemplate.Tconstant">
+            <summary>
+            常数模板
+            </summary>
+        </member>
+        <member name="E:RevitStd.Tests_Templates.classTemplate.Tevent">
+            <summary>
+            事件模板
+            </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.classTemplate.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.classTemplate.Finalize">
+            <summary>
+            析构函数 Destructor
+            </summary>
+            <remarks>
+            析构函数(destructor) 与构造函数相反，当对象脱离其作用域时（例如对象所在的函数已调用完毕），系统自动执行析构函数。
+            析构函数往往用来做“清理善后” 的工作（例如在建立对象时用new开辟了一片内存空间，应在退出前在析构函数中用delete释放）。
+             程序员不能控制解构器何时将被执行因为这是由垃圾收集器决定的。解构器也在程序退出时被调用。
+            </remarks>
+        </member>
+        <member name="P:RevitStd.Tests_Templates.classTemplate.Tproperty">
+            <summary>
+            可读可写属性模板
+            </summary>
+            <remarks>
+            也可以直接简写为：public int Tproperty{get;set;} 
+            当取消属性中的get或者set块的时候，此属性就成了只写或者只读属性。
+            </remarks>
+        </member>
+        <member name="P:RevitStd.Tests_Templates.classTemplate.TwriteOnlyProperty">
+            <summary>
+            只写属性
+            </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.classTemplate.Tmethod(System.String[])">
+            <summary>
+            方法模板
+            </summary>
+            <param name="paraParam">参考</param>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.classTemplate.Tfunction(System.String,System.String@,System.String@)">
+            <summary>
+            函数模板
+            </summary>
+            <param name="paraValue">一般的参数，默认为值传递</param>
+            <param name="paraRef">地址传递，在调用时要在输入实参前面加上 ref 。</param>
+            <param name="paraOut">用来输出的参数，在调用时要在输入实参前面加上 out 。</param>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.classTemplate.Main(System.String[])">
+            <summary>
+            主程序入口
+            </summary>
+        </member>
+        <member name="T:RevitStd.Tests_Templates.ExeTest">
+            <summary> </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.ExeTest.Main">
+            <summary> </summary>
+        </member>
+        <member name="T:RevitStd.Tests_Templates.Template_ModelessForm">
+            <summary>
+            无模态窗口的模板
+            此窗口可以直接通过Form.Show来进行调用
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="T:RevitStd.Tests_Templates.Template_ModelessForm.RequestParameter">
+            <summary>
+            每一个外部事件调用时所提出的需求，为了在Execute方法中充分获取窗口的需求，
+            所以将调用外部事件的窗口控件以及对应的触发事件参数也传入Execute方法中。
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="P:RevitStd.Tests_Templates.Template_ModelessForm.RequestParameter.sender">
+            <summary> 引发Form事件控件对象 </summary>
+        </member>
+        <member name="P:RevitStd.Tests_Templates.Template_ModelessForm.RequestParameter.e">
+            <summary> Form中的事件所对应的事件参数 </summary>
+        </member>
+        <member name="P:RevitStd.Tests_Templates.Template_ModelessForm.RequestParameter.Id">
+            <summary> 具体的需求 </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Template_ModelessForm.RequestParameter.#ctor(RevitStd.Tests_Templates.Template_ModelessForm.Request,System.EventArgs,System.Object)">
+            <summary>
+            定义事件需求与窗口中引发此事件的控件对象及对应的事件参数
+            </summary>
+            <param name="RequestId">具体的需求</param>
+            <param name="e">Form中的事件所对应的事件参数</param>
+            <param name="sender">引发Form事件控件对象</param>
+            <remarks></remarks>
+        </member>
+        <member name="T:RevitStd.Tests_Templates.Template_ModelessForm.Request">
+            <summary>
+            ModelessForm的操作需求，用来从窗口向IExternalEventHandler对象传递需求。
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:RevitStd.Tests_Templates.Template_ModelessForm.Request.Pick">
+            <summary>
+            与Revit用户界面进行交互。弥补了Form.ShowDialog不能进行Selection.PickObjects等操作的缺陷。
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:RevitStd.Tests_Templates.Template_ModelessForm.Request.Delete">
+            <summary>
+            开启Revit事务以修改Revit文档。弥补了Form.Show后开启事务时给出报错：
+            “Starting a transaction from an external application running outside of APIcontext is not allowed.”的问题。
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="F:RevitStd.Tests_Templates.Template_ModelessForm.ExEvent">
+            <summary>用来触发外部事件（通过其Raise方法） </summary>
+            <remarks>ExEvent属性是必须有的，它用来执行Raise方法以触发事件。</remarks>
+        </member>
+        <member name="F:RevitStd.Tests_Templates.Template_ModelessForm.RequestPara">
+            <summary> Execute方法所要执行的需求 </summary>
+            <remarks>在Form中要执行某一个操作时，先将对应的操作需求信息赋值为一个RequestId枚举值，然后再执行ExternalEvent.Raise()方法。
+            然后Revit会在会在下个闲置时间（idling time cycle）到来时调用IExternalEventHandler.Excute方法，在这个Execute方法中，
+            再通过RequestId来提取对应的操作需求，</remarks>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Template_ModelessForm.DozeOff">
+            <summary> 在Revit执行相关操作时，禁用窗口中的控件 </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Template_ModelessForm.WarmUp">
+            <summary> 在外部事件RequestHandler中的Execute方法执行完成后，用来激活窗口中的控件 </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Template_ModelessForm.Execute(Autodesk.Revit.UI.UIApplication)">
+            <summary>
+            在执行ExternalEvent.Raise()方法之前，请先将操作需求信息赋值给其RequestHandler对象的RequestId属性。
+            当ExternalEvent.Raise后，Revit会在下个闲置时间（idling time cycle）到来时调用IExternalEventHandler.Execute方法的实现。
+            </summary>
+            <param name="app">此属性由Revit自动提供，其值不是Nothing，而是一个真实的UIApplication对象</param>
+            <remarks>由于在通过外部程序所引发的操作中，如果出现异常，Revit并不会给出任何提示或者报错，
+            而是直接退出函数。所以要将整个操作放在一个Try代码块中，以处理可能出现的任何报错。</remarks>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.ExternalApplication.NewRibbon(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            创建一个新的 Ribbon
+            </summary>
+        </member>
+        <member name="T:RevitStd.Tests_Templates.Test_ExamplesCodes">
+            <summary>
+            一些效果实现的示例代码
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Test_ExamplesCodes.GetGeometry">
+            <summary>
+            返回Element的几何数据
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Test_ExamplesCodes.FindSupporting">
+            <summary> 射线法：找到与梁相交的所有墙对象 </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Test_ExamplesCodes.FindIntersectWallsByElement">
+            <summary> 找到与某Element的几何实体相交的Elements </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Test_ExamplesCodes.FindIntersectWallsByGeometry">
+            <summary>ElementIntersectsSolidFilter: 找到与某Solid相交的Elements </summary>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Test_ExamplesCodes.ElementParameterFilter_FindOjbectsInSpecificRoom(Autodesk.Revit.UI.ExternalCommandData)">
+            <summary>
+            ElementParameterFilter 参数过滤器：找到一个房间内的所有对象
+            </summary>
+            <remarks>提示: 参数过滤条件可能比其他的类型过滤条件要快，但是这要视条件而定。毕竟这是一个慢过，使用时请按照过滤标准的复杂程度而异。</remarks>
+        </member>
+        <member name="M:RevitStd.Tests_Templates.Test_ExamplesCodes.ElementParameterFilter_FindRooms(Autodesk.Revit.DB.Document)">
+            <summary>
+            ElementParameterFilter参数过滤器 Creates an ElementParameter filter to find rooms whose area is greater than specified value
+            </summary>
+            <remarks>提示: 参数过滤条件可能比其他的类型过滤条件要快，但是这要视条件而定。毕竟这是一个慢过，使用时请按照过滤标准的复杂程度而异。</remarks>
+        </member>
+        <member name="T:RevitStd.RvtTools">
+            <summary>
+            Revit中的一些常规性操作工具
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:RevitStd.RvtTools.GetOldWDefinitionGroup(Autodesk.Revit.ApplicationServices.Application)">
+            <summary>
+            获取外部共享参数文件中的参数组“OldW”，然后可以通过DefinitionGroup.Definitions.Item(name As String)来索引其中的共享参数，
+            也可以通过DefinitionGroup.Definitions.Create(name As String)来创建新的共享参数。
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="M:RevitStd.RvtTools.Undo">
+            <summary>
+            撤消 Revit 的操作
+            </summary>
+        </member>
+        <member name="M:RevitStd.RvtTools.FormatTimeToMinite(System.DateTime)">
+            <summary> 将时间数值转换为字符串，其显示精度为分钟 </summary>
+        </member>
+        <member name="M:RevitStd.FilterTools.Instances(Autodesk.Revit.DB.Family,Autodesk.Revit.DB.BuiltInCategory)">
+            <summary> 返回项目文档中某族Family的所有实例 </summary>
+            <param name="Category">此族所属的 BuiltInCategory 类别，如果不确定，就不填。</param>
+            <param name="Family"></param>
+        </member>
+        <member name="M:RevitStd.FilterTools.getFamilySymbolsByFamilyName(Autodesk.Revit.DB.Document,System.String)">
+            <summary>
+            通过族名称获得该族的类型
+            </summary>
+            <param name="doc"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.FilterTools.Instances(Autodesk.Revit.DB.FamilySymbol)">
+            <summary> 返回项目文档中某族类型FamilySymbol的所有实例 </summary>
+            <param name="FamilySymbol"></param>
+        </member>
+        <member name="M:RevitStd.FilterTools.intersect(Autodesk.Revit.DB.Document,System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId},System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId})">
+            <summary>
+            返回两个集合交集
+            </summary>
+            <param name="doc"></param>
+            <param name="col1"></param>
+            <param name="col2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.FilterTools.union(Autodesk.Revit.DB.Document,System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId},System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId})">
+            <summary>
+            返回两个集合并集
+            </summary>
+            <param name="doc"></param>
+            <param name="col1"></param>
+            <param name="col2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.FilterTools.FindElements(Autodesk.Revit.DB.Document,System.Type,Autodesk.Revit.DB.BuiltInCategory,System.String)">
+            <summary>
+            根据指定的类型、类别与名称来搜索Revit文档所有元素中的第一个有效对象
+            </summary>
+            <param name="rvtDoc"></param>
+            <param name="targetType"></param>
+            <param name="targetCategory"> INVALID 表示不进行类别限制 </param>
+            <param name="targetName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.FilterTools.FindElements(Autodesk.Revit.DB.Document,System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId},System.Type,Autodesk.Revit.DB.BuiltInCategory,System.String)">
+            <summary>
+             根据指定的类型、类别与名称来搜索Revit文档指定元素集合中的第一个有效对象
+            </summary>
+            <param name="rvtDoc">要进行搜索的Revit文档</param>
+            <param name="SourceElements">要从文档中的哪个集合中来进行搜索</param>
+            <param name="targetType"></param>
+            <param name="targetCategory"> INVALID 表示不进行类别限制 </param>
+            <param name="targetName"></param>
+            <returns></returns>
+            <remarks></remarks>
+        </member>
+        <member name="M:RevitStd.FilterTools.FindElement(Autodesk.Revit.DB.Document,System.Type,Autodesk.Revit.DB.BuiltInCategory,System.String)">
+            <summary>
+            根据指定的类型、类别与名称来搜索Revit文档的所有元素中的第一个有效对象
+            </summary>
+            <param name="rvtDoc"></param>
+            <param name="targetType"></param>
+            <param name="targetCategory"> INVALID 表示不进行类别限制 </param>
+            <param name="targetName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.FilterTools.FindElement(Autodesk.Revit.DB.Document,System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId},System.Type,Autodesk.Revit.DB.BuiltInCategory,System.String)">
+            <summary>
+            根据指定的类型、类别与名称来搜索Revit文档指定元素集合中的第一个有效对象
+            </summary>
+            <param name="rvtDoc"></param>
+            <param name="SourceElements"></param>
+            <param name="targetType"></param>
+            <param name="targetCategory"> INVALID 表示不进行类别限制 </param>
+            <param name="targetName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RevitStd.FilterTools.FindFamily(Autodesk.Revit.DB.Document,System.String,Autodesk.Revit.DB.BuiltInCategory)">
+            <summary> 返回项目文档中指定名称的族Family对象 </summary>
+            <param name="FamilyName">在此文档中，所要搜索的族对象的名称</param>
+            <param name="Category">此族所属的 BuiltInCategory 类别，如果不确定，就不填。</param>
+            <returns>如果没有找到指定的 Family，则返回 null。</returns>
+        </member>
+        <member name="M:RevitStd.FilterTools.FindFamilies(Autodesk.Revit.DB.Document,Autodesk.Revit.DB.BuiltInCategory)">
+            <summary> 返回项目文档中指定类别的族对象。在函数中会对所有族对象的FamilyCategory进行判断。</summary>
+            <param name="Category">此族所属的 BuiltInCategory 类别，即FamilyCategory属性所对应的类别。</param>
+        </member>
+        <member name="T:DllActivator.IDllActivator_RevitStd">
+            <summary>
+            用于在IExternalCommand.Execute方法中，将整个项目的所有dll加载到进程中。
+            以避免出现在后面出现无法加载文件或者程序集的问题。
+            此接口是专门为AddinManager在调试时设计的，在最终软件发布之前，此接口以及所有与之相关的类以及调用方法都可以删除。
+            </summary>
+            <remarks>在每一次调用Execute方法的开关，都可以用如下代码来将对应项目的所有引用激活。
+            DllActivator.DllActivator_Projects dat = new DllActivator.DllActivator_Projects();
+            dat.ActivateReferences();
+            </remarks>
+        </member>
+        <member name="M:DllActivator.IDllActivator_RevitStd.ActivateReferences">
+            <summary> 激活本DLL所引用的那些DLLs </summary>
+        </member>
+        <member name="M:DllActivator.DllActivator_RevitStd.ActivateReferences">
+            <summary>
+            激活本DLL所引用的那些DLLs
+            </summary>
+        </member>
+    </members>
+</doc>

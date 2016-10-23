@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>eZRvt</name>
+    </assembly>
+    <members>
+        <member name="T:eZRvt.Commands.cmd_DebugTest">
+            <summary>
+            在界面中选择一个面，并以此来定义工作平面 work plane
+            </summary>
+        </member>
+        <member name="T:eZRvt.Commands.cmd_PickWorkPlane">
+            <summary>
+            在界面中选择一个面，并以此来定义工作平面 work plane
+            </summary>
+        </member>
+    </members>
+</doc>

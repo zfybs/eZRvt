@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>eZRvtRibbonTab</name>
+    </assembly>
+    <members>
+        <member name="F:eZRvt.AppAddRibbonTab.Path_Dlls">
+            <summary> Application的Dll所对应的路径，也就是“bin”文件夹的目录。 </summary>
+        </member>
+        <member name="F:eZRvt.AppAddRibbonTab.Path_icons">
+            <summary> 存放图标的文件夹 </summary>
+        </member>
+        <member name="F:eZRvt.AppAddRibbonTab.AppName">
+            <summary> 整个程序的标志性名称 </summary>
+        </member>
+        <member name="F:eZRvt.AppAddRibbonTab.Dll_eZRvt">
+            <summary> eZRvt 项目的Dll的名称 </summary>
+        </member>
+        <member name="F:eZRvt.AppAddRibbonTab.Dll_RibbonTab">
+            <summary> 本程序集的Dll的名称 </summary>
+        </member>
+        <member name="M:eZRvt.AppAddRibbonTab.#ctor">
+            <summary>
+             构造函数
+            </summary>
+        </member>
+        <member name="M:eZRvt.AppAddRibbonTab.OnStartup(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary> Ribbon界面设计 </summary>
+        </member>
+        <member name="M:eZRvt.AppAddRibbonTab.AddPushButtonPickWorkPlane(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“工作平面”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.AppAddRibbonTab.AddPushButtonDebugTest(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“测试”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.AppAddRibbonTab.AddPushButtonAbout(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“关于”的按钮 </summary>
+        </member>
+        <member name="F:eZRvt.OldWAppAddRibbonTab.Path_Dlls">
+            <summary> Application的Dll所对应的路径，也就是“bin”文件夹的目录。 </summary>
+        </member>
+        <member name="F:eZRvt.OldWAppAddRibbonTab.Path_icons">
+            <summary> 存放图标的文件夹 </summary>
+        </member>
+        <member name="F:eZRvt.OldWAppAddRibbonTab.AppName">
+            <summary> 整个程序的标志性名称 </summary>
+        </member>
+        <member name="F:eZRvt.OldWAppAddRibbonTab.Dll_Projects">
+            <summary> Projects 项目的Dll的名称 </summary>
+        </member>
+        <member name="F:eZRvt.OldWAppAddRibbonTab.Dll_RibbonTab">
+            <summary> 本程序集的Dll的名称 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.#ctor">
+            <summary>
+             构造函数
+            </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.OnStartup(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary> Ribbon界面设计 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonExcavation(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“开挖”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonExcavationInfo(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“开挖信息”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonDataExcavSoilReCut">
+            <summary> 添加“修复剪切”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonDataDeleteRedundantExcavations">
+            <summary> 添加“清理冗余”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonFilterInstrums(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“监测数据管理”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddSplitButtonModeling(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“放置监测点”的下拉记忆按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonDataManager(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“监测数据管理”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonDataImport(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“数据导入”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonDataExport(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“数据导出”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonShowOldWModel(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“手动查看开挖工况”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddTextBoxCurrentDate">
+            <summary> 添加“当前时间”的文本框 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.SetTextBoxViewStageStyle(Autodesk.Revit.UI.TextBox)">
+            <summary> 设置“当前时间”的文本框的格式 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonDataViewStage">
+            <summary> 添加“查看某一天的开挖工况”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonDataViewStageManually">
+            <summary> 添加“手动查看开挖工况”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonViewStageDynamically(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“自动查看开挖工况”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonSetWarning(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“警戒值设定”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonAnalysis(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“分析”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.OldWAppAddRibbonTab.AddPushButtonAbout(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“关于”的按钮 </summary>
+        </member>
+    </members>
+</doc>
