@@ -29,6 +29,7 @@ namespace RevitStd
         public const double AngleTolerance = 0.0015;
 
         #endregion
+
         /// <summary>
         /// Find out the three points which made of a plane.
         /// </summary>
@@ -299,6 +300,28 @@ namespace RevitStd
 
         #region ---    Face 的搜索
 
+        public static PlanarFace GetBottomPlanarFace(Element element)
+        {
+            Dictionary<Solid, bool> solids = GetSolidsInModel(element,SolidVolumnConstraint.Positive);
+            IList<Face> faces = GetSurfaces(solids.Keys);
+            PlanarFace bottomPf = null;
+            double lowestElevation = double.MaxValue;
+            foreach (Face f in faces)
+            {
+                if (f is PlanarFace)
+                {
+                    PlanarFace pf = (PlanarFace)f;
+
+                    // 法向向下，而且标高最低
+                    if (IsSameDirection(pf.FaceNormal, new XYZ(0, 0, -1)) && pf.Origin.Z < lowestElevation)
+                    {
+                        lowestElevation = pf.Origin.Z;
+                        bottomPf = pf;
+                    }
+                }
+            }
+            return bottomPf;
+        }
         /// <summary>
         /// 获取 Solid 集合（Solid的体积不一定都大于等于0）中所有面积大于0 的 Face 对象
         /// </summary>

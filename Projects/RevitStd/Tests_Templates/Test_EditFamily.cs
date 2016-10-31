@@ -13,41 +13,6 @@ namespace RevitStd.Tests_Templates
     internal class Test_EditFamily
     {
 
-        private Result RefreshExcavationSoil(ExternalCommandData commandData)
-        {
-            UIApplication uiApp = commandData.Application;
-
-            Document doc = uiApp.ActiveUIDocument.Document;
-            Autodesk.Revit.DB.View view = uiApp.ActiveUIDocument.ActiveGraphicalView;
-            //
-
-            //
-
-            // ExternalDefinition familyDefinition = null;
-            DefinitionGroup defGroup = RvtTools.GetOldWDefinitionGroup(uiApp.Application);
-            ExternalDefinition ExDef = defGroup.Definitions.get_Item("某共享参数名") as ExternalDefinition;
-
-            //
-            Family someFamily = null;
-            Document famDoc = doc.EditFamily(someFamily);
-
-            try
-            {
-                EditFamily(famDoc, ExDef);
-            }
-            catch (Exception ex)
-            {
-                DebugUtils.ShowDebugCatch(ex, "修改族参数名称");
-            }
-
-            // 将族加载到项目文档中
-            Family fam = famDoc.LoadFamily(doc, UIDocument.GetRevitUIFamilyLoadOptions());
-            famDoc.Close(false);
-
-
-            return Result.Succeeded;
-        }
-
         private void EditFamily(Document famDoc, ExternalDefinition ExDef)
         {
 

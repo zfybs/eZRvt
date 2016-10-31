@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Autodesk.Revit.DB;
-using RevitStd;
 
 namespace RevitStd.Geometry
 {
-
     /// <summary> 将任意曲面转换为平面网格集合 </summary>
     public class SurfaceTriangulator
     {
@@ -29,7 +24,7 @@ namespace RevitStd.Geometry
         {
             Mesh mesh = GetMesh();
             TessellatedShapeBuilder builder
-              = new TessellatedShapeBuilder();
+                = new TessellatedShapeBuilder();
 
             builder.OpenConnectedFaceSet(false);
 
@@ -46,11 +41,11 @@ namespace RevitStd.Geometry
                 triangleCorners[2] = triangle.get_Vertex(2);
 
                 TessellatedFace tesseFace
-                  = new TessellatedFace(triangleCorners,
-                    ElementId.InvalidElementId);
+                    = new TessellatedFace(triangleCorners,
+                        ElementId.InvalidElementId);
 
                 if (builder.DoesFaceHaveEnoughLoopsAndVertices(
-                  tesseFace))
+                    tesseFace))
                 {
                     builder.AddFace(tesseFace);
                 }
@@ -59,10 +54,10 @@ namespace RevitStd.Geometry
             builder.CloseConnectedFaceSet();
 
             TessellatedShapeBuilderResult result
-              = builder.Build(
-                TessellatedShapeBuilderTarget.AnyGeometry,
-                TessellatedShapeBuilderFallback.Mesh,
-                ElementId.InvalidElementId);
+                = builder.Build(
+                    TessellatedShapeBuilderTarget.AnyGeometry,
+                    TessellatedShapeBuilderFallback.Mesh,
+                    ElementId.InvalidElementId);
 
             var geo = result.GetGeometricalObjects();
 
@@ -79,12 +74,10 @@ namespace RevitStd.Geometry
         /// <returns></returns>
         private Mesh GetMesh()
         {
-
             Mesh mesh = _face.Triangulate();
             mesh = mesh.get_Transformed(_transform);
 
             return mesh;
         }
-
     }
 }

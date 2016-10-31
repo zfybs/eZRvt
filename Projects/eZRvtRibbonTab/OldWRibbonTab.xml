@@ -27,6 +27,15 @@
         <member name="M:eZRvt.AppAddRibbonTab.OnStartup(Autodesk.Revit.UI.UIControlledApplication)">
             <summary> Ribbon界面设计 </summary>
         </member>
+        <member name="M:eZRvt.AppAddRibbonTab.AddPushButtonDrawFaceWall(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“绘制面层对象”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.AppAddRibbonTab.AddPushButtonConduitLayout(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“线管连接”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.AppAddRibbonTab.AddPushButtonHideConduit(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“隐藏指定标高范围由的线管”的按钮 </summary>
+        </member>
         <member name="M:eZRvt.AppAddRibbonTab.AddPushButtonPickWorkPlane(Autodesk.Revit.UI.RibbonPanel)">
             <summary> 添加“工作平面”的按钮 </summary>
         </member>

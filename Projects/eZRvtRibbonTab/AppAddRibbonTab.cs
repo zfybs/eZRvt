@@ -62,7 +62,15 @@ namespace eZRvt
             //Create a custom ribbon tab
             string tabName = AppName;
             application.CreateRibbonTab(tabName);
-            
+
+            // -------------------------------------------------------------------------------
+            // CMIE 中机国际插件集
+            RibbonPanel ribbonPanelCMIE = application.CreateRibbonPanel(tabName, "CMIE");
+            AddPushButtonDrawFaceWall(ribbonPanelCMIE);
+            AddPushButtonConduitLayout(ribbonPanelCMIE);
+            AddPushButtonHideConduit(ribbonPanelCMIE);
+
+
             // -------------------------------------------------------------------------------
             // 建模面板
             RibbonPanel ribbonPanelModeling = application.CreateRibbonPanel(tabName, "其他");
@@ -83,6 +91,55 @@ namespace eZRvt
         }
 
         #region   ---  添加按钮  （如果LargeImage所对应的图片不能在Ribbon中显示，请尝试先下载128*128的，然后通过画图工具将其大小调整为32*32.）
+
+        #region   ---   CMIE 中机国际插件集
+
+        /// <summary> 添加“绘制面层对象”的按钮 </summary>
+        private void AddPushButtonDrawFaceWall(RibbonPanel panel)
+        {
+            // Create a new push button
+            PushButton pushButton =
+                panel.AddItem(new PushButtonData("DrawFaceWall", "绘制面层", Path.Combine(Path_Dlls, Dll_eZRvt),
+                    "eZRvt.Commands.cmd_DrawFaceWall")) as PushButton;
+            pushButton.ToolTip = "绘制面层对象";
+            // Set Contextual help
+            ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.Url, "http://www.cmie.cn");
+            pushButton.SetContextualHelp(contextHelp);
+            // Set Icon
+            pushButton.LargeImage = new BitmapImage(new Uri(Path.Combine(Path_icons, "DrawFace_32.png")));
+        }
+
+        /// <summary> 添加“线管连接”的按钮 </summary>
+        private void AddPushButtonConduitLayout(RibbonPanel panel)
+        {
+            // Create a new push button
+            PushButton pushButton =
+                panel.AddItem(new PushButtonData("ConduitLayout", "线管连接", Path.Combine(Path_Dlls, Dll_eZRvt),
+                    "eZRvt.Commands.cmd_ConduitLayout")) as PushButton;
+            pushButton.ToolTip = "将线管与电气设备进行连接";
+            // Set Contextual help
+            ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.Url, "http://www.cmie.cn");
+            pushButton.SetContextualHelp(contextHelp);
+            // Set Icon
+            pushButton.LargeImage = new BitmapImage(new Uri(Path.Combine(Path_icons, "ConduitLayout_32.png")));
+        }
+
+        /// <summary> 添加“隐藏指定标高范围由的线管”的按钮 </summary>
+        private void AddPushButtonHideConduit(RibbonPanel panel)
+        {
+            // Create a new push button
+            PushButton pushButton =
+                panel.AddItem(new PushButtonData("HideConduit", "隐藏线管", Path.Combine(Path_Dlls, Dll_eZRvt),
+                    "eZRvt.Commands.cmd_HideConduit")) as PushButton;
+            pushButton.ToolTip = "隐藏指定标高范围由的线管";
+            // Set Contextual help
+            ContextualHelp contextHelp = new ContextualHelp(ContextualHelpType.Url, "http://www.cmie.cn");
+            pushButton.SetContextualHelp(contextHelp);
+            // Set Icon
+            pushButton.LargeImage = new BitmapImage(new Uri(Path.Combine(Path_icons, "Filter_32.png")));
+        }
+
+        #endregion
 
         /// <summary> 添加“工作平面”的按钮 </summary>
         private void AddPushButtonPickWorkPlane(RibbonPanel panel)
@@ -128,7 +185,7 @@ namespace eZRvt
         {
             // Create a new push button
             PushButton pushButton =
-                panel.AddItem(new PushButtonData("About", "关于", Path.Combine(Path_Dlls, Dll_eZRvt), "eZRvt.IECAbout"))
+                panel.AddItem(new PushButtonData("About", "关于", Path.Combine(Path_Dlls, Dll_RibbonTab), "eZRvt.IECAbout"))
                     as PushButton;
             // Set ToolTip
             pushButton.ToolTip = "关于信息";

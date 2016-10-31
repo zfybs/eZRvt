@@ -1,23 +1,20 @@
 ﻿using System;
-using System.Windows.Forms;
+using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using RevitStd.Selector;
 using DllActivator;
-using eZstd.Miscellaneous;
-using View = Autodesk.Revit.DB.View;
+using RevitStd.Selector;
 
 namespace eZRvt.Commands
 {
     /// <summary>
     /// 在界面中选择一个面，并以此来定义工作平面 work plane
     /// </summary>
-    [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
+    [Transaction(TransactionMode.Manual)]
     public class cmd_PickWorkPlane : IExternalCommand
     {
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
-
             //
             DllActivator_eZRvt dat = new DllActivator_eZRvt();
             dat.ActivateReferences();
@@ -25,7 +22,7 @@ namespace eZRvt.Commands
             UIApplication uiApp = commandData.Application;
             UIDocument uiDoc = uiApp.ActiveUIDocument;
             Document doc = uiApp.ActiveUIDocument.Document;
-            
+
             // 是否只根据平面来创建工作平面，而不考虑曲面
             bool planarFaceOnly = true;
             if (planarFaceOnly)
@@ -35,11 +32,10 @@ namespace eZRvt.Commands
             else
             {
                 return SetWorkPlaneFromAnyFace(uiDoc, doc);
-
             }
         }
 
-        private Result SetWorkPlaneFromPlanarFace(UIDocument uiDoc,Document doc)
+        private Result SetWorkPlaneFromPlanarFace(UIDocument uiDoc, Document doc)
         {
             // 先在界面中选择一个平面
             Element elem;
@@ -112,7 +108,7 @@ namespace eZRvt.Commands
                         }
 
                         // 构造一个平面
-                        Plane plane = new Plane(norm:fc.ComputeNormal(refe.UVPoint),origin:refe.GlobalPoint);
+                        Plane plane = new Plane(norm: fc.ComputeNormal(refe.UVPoint), origin: refe.GlobalPoint);
 
                         // 将得到的平面定义为新的工作平面
                         sp = SketchPlane.Create(doc, plane);
@@ -133,7 +129,5 @@ namespace eZRvt.Commands
             }
             return Result.Succeeded;
         }
-
     }
 }
-
