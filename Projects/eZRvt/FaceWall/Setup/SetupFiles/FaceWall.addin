@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+<AddIn Type="Application">
+  <Name>ExternalApplication</Name>
+  <Assembly>C:\ProgramData\Autodesk\Revit\Addins\2016\FaceWall\FaceWall.dll</Assembly>
+  <ClientId>dbb30c8f-65c9-4b9b-8e77-1fd252dc377b</ClientId>
+  <FullClassName>FaceWall.ExternalApplication</FullClassName>
+  <VendorId>ADSK</VendorId>
+  <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+</AddIn>
+</RevitAddIns>

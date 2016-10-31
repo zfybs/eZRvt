@@ -14,5 +14,671 @@
             在界面中选择一个面，并以此来定义工作平面 work plane
             </summary>
         </member>
+        <member name="T:eZRvt.Commands.cmd_ConduitLayout">
+            <summary> 通过在界面中点选线管A与电气设备B，来新增一段线管C，以将A与B相连 </summary>
+        </member>
+        <member name="M:eZRvt.Commands.cmd_ConduitLayout.SelectCabinet_Conduit(Autodesk.Revit.UI.UIDocument,Autodesk.Revit.DB.FamilyInstance@,Autodesk.Revit.DB.Electrical.Conduit@)">
+            <summary>
+            选择模型中的线管或者电气设备
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.Commands.cmd_ConduitLayout.SelectCabinet_Conduits(Autodesk.Revit.UI.UIDocument,Autodesk.Revit.DB.FamilyInstance@,System.Collections.Generic.List{Autodesk.Revit.DB.Electrical.Conduit}@,System.String@)">
+            <summary>
+            选择模型中的线管或者电气设备
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:eZRvt.Commands.cmd_ConduitLayout.SelectionFilter_Cabinet_Conduit">
+            <summary>
+            选择线管对象
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="T:eZRvt.Commands.cmd_ConduitLayout.SelectionFilter_Cabinet">
+            <summary>
+            在模型中选择配电箱
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="T:eZRvt.Commands.cmd_ConduitLayout.SelectionFilter_Conduit">
+            <summary>
+            选择线管对象
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="T:eZRvt.Commands.cmd_HideConduit">
+            <summary> 将指定标高范围内的线管对象进行临时隐藏 </summary>
+        </member>
+        <member name="M:eZRvt.Commands.cmd_HideConduit.IsWithinElevationRange(System.Double,eZRvt.ConduitLayout.FilterOption)">
+            <summary>
+            
+            </summary>
+            <param name="elevation">连接件的标高，单位为inch</param>
+            <param name="filterOption"></param>
+            <returns></returns>
+        </member>
+        <member name="T:eZRvt.Commands.cmd_DrawFaceWall">
+            <summary> 绘制面层 </summary>
+        </member>
+        <member name="T:eZRvt.ConduitLayout.ConduitFittingMEP">
+            <summary>
+            用来进行线管到配电箱的连接
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.ConduitFittingMEP._cabinet">
+            <summary>
+            配电箱
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.ConduitFittingMEP._conduit">
+            <summary>
+            线管
+            </summary>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitFittingMEP.#ctor(eZRvt.ConduitLayout.MEPElectricalEquipment,Autodesk.Revit.DB.Electrical.Conduit)">
+            <summary>
+            
+            </summary>
+            <param name="cabinet">配电箱</param>
+            <param name="conduit">线管</param>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitFittingMEP.Connect(Autodesk.Revit.DB.Transaction)">
+            <summary>
+            将线管连接到设备中可用的第一个连接件上
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitFittingMEP.Connect(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.Connector)">
+            <summary>
+            将线管连接到设备中的指定的那一个连接件上
+            </summary>
+            <param name="cabConnctor"> 配电箱中的要进行连接的连接件</param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitFittingMEP.Connect(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.Connector,Autodesk.Revit.DB.Connector)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitFittingMEP.GetRayPoint(Autodesk.Revit.DB.Transform,Autodesk.Revit.DB.Transform)">
+            <summary>
+            根据线管的位置与方向，以及设备中连接件的位置，得到此线管发出的射线与设备连接件的某竖向平面的交点
+            </summary>
+            <param name="conduit"></param>
+            <param name="cabinet"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitFittingMEP.GetElbowRadiusRatio(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.Electrical.Conduit)">
+            <summary>
+            获取线管所对应的弯头的族文档中，族参数“弯曲半径 = 管件外径 * 15” 后面的数值 15
+            </summary>
+            <param name="conduit"> 线管对象 </param>
+            <returns>  </returns>
+        </member>
+        <member name="T:eZRvt.ConduitLayout.ElbowFamily">
+            <summary>
+            弯头所对应的族文档
+            </summary>
+        </member>
+        <member name="T:eZRvt.ConduitLayout.MEPConduit">
+            <summary>
+            弯头
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.MEPConduit.ConduitIns">
+            <summary> 线管对象 </summary>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.MEPConduit.GetConduitDiameter">
+            <summary>
+            获取线管的直径。
+            </summary>
+            <param name="cd"> 线管对象 </param>
+            <returns>线管的直径，单位为 inch </returns>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.MEPConduit.SetConduitDiameter(System.Double)">
+            <summary>
+            设置线管的直径。
+            </summary>
+            <param name="cd"> 线管对象 </param>
+            <param name="diameter"> 直径，单位为 inch </param>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.MEPConduit.GetConduitOuterDiameter">
+            <summary>
+            设置线管的外径
+            </summary>
+            <param name="cd"> 线管对象 </param>
+            <param name="diameter"> 直径，单位为 inch </param>
+        </member>
+        <member name="T:eZRvt.ConduitLayout.MEPElectricalEquipment">
+            <summary>
+            包含有 MEPModel 的族实例，比如 配电箱 等，其中都有 ConnectorManager 等连接件的信息。
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.MEPElectricalEquipment.MepModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.MEPElectricalEquipment.#ctor(Autodesk.Revit.DB.FamilyInstance)">
+            <summary>
+            
+            </summary>
+            <param name="mepInstance"></param>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ExternalApplication.AddPushButtonShowPane(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“打开面层面板”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ExternalApplication.AddPushButtonHideRange(Autodesk.Revit.UI.RibbonPanel)">
+            <summary> 添加“打开面层面板”的按钮 </summary>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitLevelFilter.#ctor">
+            <summary> 构造函数 </summary>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitLevelFilter.RefreshLevels(Autodesk.Revit.UI.UIDocument)">
+            <summary>
+            将新的文档中的标高对象刷新到窗口界面中
+            </summary>
+            <param name="uiDoc"></param>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitLevelFilter.PickLevel">
+            <summary>
+            选择的对象的标高，单位为m。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitLevelFilter.HideMethodReturned(System.Object)">
+            <summary>
+            用在 ShowDialogWin 或者 ShowDialogForm 类中。
+            当 DialogForm 被隐藏并执行完与Revit交互的hideProc方法后被触发。此事件响应完会即会立即执行  System.Windows.Window.ShowDialog();
+            </summary>
+            <param name="returnedValue"> hideProc 方法执行完成后的返回值，如果 hideProc 方法没有返回值，则 returnedValue 为 null。</param>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.ConduitLevelFilter.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitLevelFilter.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZRvt.ConduitLayout.ConduitLevelFilter.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.FilterOption.Top">
+            <summary>
+            顶部标高位置，单位为m
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.FilterOption.Bottom">
+            <summary>
+            底部标高位置，单位为m
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.FilterOption.CheckAllConnector">
+            <summary>
+            如果为true，表示线管中只要有一个 Connector 不在视图范围内，则将其隐藏；
+            如果为false，表示线管中只要有一个 Connector 在视图范围内，则不将其隐藏
+            </summary>
+        </member>
+        <member name="F:eZRvt.ConduitLayout.FilterOption.ShowElementsInRange">
+            <summary>
+            如果为true，表示将标高区间内的线管对象进行显示；
+            如果为false，表示将标高区间内的线管对象进行隐藏；
+            </summary>
+        </member>
+        <member name="T:eZRvt.GlobalSettings.ConduitLayoutParameters">
+            <summary> 与项目“线管”相关的全局数据 </summary>
+        </member>
+        <member name="T:eZRvt.GlobalSettings.ProjectPath">
+            <summary> 整个项目中所有的相关文件或文件夹的绝对路径 </summary>
+        </member>
+        <member name="P:eZRvt.GlobalSettings.ProjectPath.DllFile">
+            <summary> Application的Dll所对应的路径，也就是“eZRvt.dll”文件的路径。 </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.ProjectPath.Dlls">
+            <summary> Application的Dll所对应的路径，也就是“bin”文件夹的目录。 </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.ProjectPath.Solution">
+            <summary> Application的Dll所对应的路径，也就是“bin”文件夹的目录。 </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.ProjectPath.Resources">
+            <summary> “Resources”文件夹的目录。 </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.ProjectPath.Data">
+            <summary> “Resources/Data”文件夹的目录。 </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.ProjectPath.icons">
+            <summary> “Resources/Data”文件夹的目录。 </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.ProjectPath.SharedParameters">
+            <summary> 共享参数文本文件的绝对路径 </summary>
+        </member>
+        <member name="T:eZRvt.GlobalSettings.FaceWallParameters">
+            <summary> 与项目“面墙”相关的全局数据 </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.FaceWallParameters.sp_Group_Face">
+            <summary>
+            面层对象的共享参数的参数组名称
+            </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.FaceWallParameters.sp_FaceIdTag_guid">
+            <summary>
+            共享参数：面层对象的标识符
+            </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.FaceWallParameters.sp_Area_guid">
+            <summary>
+            共享参数：面层的面积
+            </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.FaceWallParameters.sp_Volumn_guid">
+            <summary>
+            共享参数：面层的体积
+            </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.FaceWallParameters.sp_FaceType_guid">
+            <summary>
+            共享参数：面层的类型，比如防水、抹灰等
+            </summary>
+        </member>
+        <member name="F:eZRvt.GlobalSettings.FaceWallParameters.FaceIdentificaion">
+            <summary> 面层对象区别于墙类别中其他对象的标识字段 </summary>
+        </member>
+        <member name="T:eZRvt.FaceWall.FaceDrawer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.FaceDrawer._isDrawing">
+            <summary>
+            当前的绘制操作是否还未完成。如果当前正在绘制，则不能继续绘制。
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.DrawFromOneFace(Autodesk.Revit.UI.UIDocument,eZRvt.FaceWall.FaceOptions)">
+            <summary>
+            根据选择的一个平面或者曲线来绘制一个面层对象
+            </summary>
+            <param name="uiDoc"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.DrawOneElemWithFaces(Autodesk.Revit.UI.UIDocument,eZRvt.FaceWall.FaceOptions)">
+            <summary>
+            选择多个面，并将对应的多个面层绘制到一个DirectShape中
+            </summary>
+            <param name="uiDoc"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.SelectSurface(Autodesk.Revit.UI.UIDocument,eZRvt.FaceWall.FaceOptions)">
+            <summary>
+            选择模型中的结构单元表面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.SelectSurfaces(Autodesk.Revit.UI.UIDocument,eZRvt.FaceWall.FaceOptions)">
+            <summary>
+            选择模型中的结构单元表面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.GetElementTransform(Autodesk.Revit.DB.Element)">
+            <summary>
+            将模型空间中选择到的 pickedFace（此面属性模型空间中的 bindedElement 上） 按指定的变换返回其在模型空间中的重合面
+            </summary>
+            <param name="bindedElement"> 用户在模型中选择表面所附着的那个单元，如果此单元不是 FamilyInstance ，
+            则其GetTransform()返回的肯定是一个Identity，反之则不是；但是此此单元是否被修改过决定了选择的 Face 的位置是相对于模型空间还是族空间。 </param>
+            <param name="pickedFace"> 用户在模型中通过“uidoc.Selection.PickObject(ObjectType.Face, "选择结构的表面。")”选择的实例对象的表面 </param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.ExtendToFacesWithSameNormal(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.Element,Autodesk.Revit.DB.PlanarFace,eZRvt.FaceWall.FaceOptions,Autodesk.Revit.DB.Transform)">
+            <summary>
+            将楼梯中所有与选择的表面相同方向的面上都生成面层
+            </summary>
+            <param name="docTran">  </param>
+            <param name="elem"> 用来生成面层的单元。此函数会搜索此单元中所有与 baseFace 同法向的面，并进行面层的绘制 </param>
+            <param name="pickedFace"> 楼梯中用来生成面层的那个面</param>
+            <param name="faceOp"> 生成面层的选项</param>
+            <param name="transf"> </param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.ConstructSurfaceFromPlanarFace(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.PlanarFace,eZRvt.FaceWall.FaceOptions,Autodesk.Revit.DB.Transform)">
+            <summary>
+            从单一平面来生成面层对象
+            </summary>
+            <param name="face"> 用来生成面层的那个面 </param>
+            <param name="faceOp"> 生成面层的选项 </param>
+            <returns> 如果新生成的面层实体或者进行剪切后的实体体积太小，则认为不会生成此实体（在施工中也不可能考虑如此精细的施工），此时返回 null</returns>
+            <param name="transform"> 从族几何到实例对象的变换 </param>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.ConstructSurfaceFromPlanarFaces(Autodesk.Revit.DB.Transaction,System.Collections.Generic.List{eZRvt.FaceWall.FaceDrawer.FaceTransform},eZRvt.FaceWall.FaceOptions)">
+            <summary>
+            将多个平面生成为一个面层对象
+            </summary>
+            <param name="docTran">  </param>
+            <param name="faceTransforms"> 键表示用来生成面层的多个面，对应的值表示将 face 对象 转换到模型空间中所需要进行的变换 </param>
+            <param name="faceOp"> 生成面层的选项 </param>
+            <returns> 如果新生成的面层实体或者进行剪切后的实体体积太小，则认为不会生成此实体（在施工中也不可能考虑如此精细的施工），此时返回 null</returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.ExtrudeSolid(Autodesk.Revit.DB.PlanarFace,Autodesk.Revit.DB.Transform,System.Double)">
+            <summary>
+            根据指定的平面与变换关系拉伸出一个实体
+            </summary>
+            <param name="face"> </param>
+            <param name="transform"> 将 face 对象 转换到模型空间中所需要进行的变换</param>
+            <param name="thickNess"> 面层的厚度，单位为米 </param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.CorrespondFace(Autodesk.Revit.DB.Solid,Autodesk.Revit.DB.PlanarFace,Autodesk.Revit.DB.Transform)">
+            <summary>
+            根据用户选择的面来匹配模型中实体所对应的面（用来计算实际的面层面积）
+            </summary>
+            <param name="solidInModel">此实体由pickedFace拉伸后生成，位于模型空间中的实体，而且其在进行过交叉剪切操作后的实体。</param>
+            <param name="pickedFace"></param>
+            <param name="transf"></param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.ExcludeIntersect(Autodesk.Revit.DB.DirectShape,System.Collections.Generic.IList{Autodesk.Revit.DB.Solid},System.Boolean@)">
+            <summary>
+            判断当前创建出来的那个实体是否与其他单元相交，如果相交，则在原实体中剪除相交的部分，如果没有相交，则直接返回原实体集合（集合中的元素个数与原 originalSolids 集合中元素个数相同）。
+            </summary>
+            <param name="directShape"></param>
+            <param name="originalSolids"> directShape 所对应的实体，由于 ExecuteBooleanOperationModifyingOriginalSolid 函数中的 OriginalSolid 
+            不能是直接从Revit的Element中得到的，所以要将前面通过轮廓拉伸出来的实体作为参数传入。</param>
+            <param name="hasIntersect"></param>剪切后的实体的体积有可能不大于 0 啊
+            <returns> 返回的集合中的元素个数与原 originalSolids 集合中元素个数相同。剪切后的实体的体积有可能不大于 0 .</returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.UnionSolid(System.Collections.Generic.IList{Autodesk.Revit.DB.Solid})">
+            <summary>
+            将一个directShape中的多个Solid进行合并
+            </summary>
+            <param name="originalSolids"></param>
+            <returns>理想情况下，返回的集合中应该只有一个Solid，但是由于Union操作不一定每次都能成功，所以此集合中还会有出现不成功时的那些Solid。</returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.BindParametersToCategory(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.Document,Autodesk.Revit.DB.ElementId)">
+            <summary>
+            将外部共享参数创建为项目参数，并将其绑定到指定的类别
+            </summary>
+            <param name="transDoc"> bindingMap.Insert 与 bindingMap.ReInsert 方法必须在事务内才能执行</param>
+            <param name="doc"></param>
+            <param name="facenCategoryId"> 面层对象所属的类别 </param>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceDrawer.SetParameters(Autodesk.Revit.DB.Transaction,Autodesk.Revit.DB.DirectShape,System.Double,System.Double,eZRvt.FaceWall.FaceOptions)">
+            <summary>
+            为面层实体设置颜色、类型等参数
+            </summary>
+            <param name="tran"></param>
+            <param name="ds"></param>
+            <param name="volumn"></param>
+            <param name="area"></param>
+            <param name="faceOptions"></param>
+        </member>
+        <member name="T:eZRvt.FaceWall.FaceExcluder">
+            <summary>
+            在选择表面时排除WallFace对象
+            </summary>
+            <remarks></remarks>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceExcluder.#ctor(Autodesk.Revit.DB.Document,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="doc"></param>
+            <param name="excludeFaceElement">不选择面层对象</param>
+            <param name="onlyPlanarFace">只能选择平面几何</param>
+        </member>
+        <member name="F:eZRvt.FaceWall.FaceFilter.CategoryIds">
+            <summary>
+            所有的面层对象可能的类别的集合
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceFilter.#ctor(Autodesk.Revit.DB.Document)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="doc"></param>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceFilter.GetAllInDoc">
+            <summary>
+            从整个文档中的单元集合中过滤出面层对象
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceFilter.GetAllInSelected">
+            <summary>
+            从选择的单元集合或者整个文档中的单元集合中过滤出面层对象，并将其在界面中选中
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceFilter.FilterSelected(eZRvt.FaceWall.FaceOptions)">
+            <summary>
+            从选择的单元集合或者整个文档中的单元集合中，根据指定的面层选项来进行过滤
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceFilter.faceLookup(Autodesk.Revit.DB.Document,System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId})">
+            <summary>
+             从整个文档中的指定集合中搜索面层对象
+            </summary>
+            <param name="doc"></param>
+            <param name="elementIds"> 如果其值为null，则表示搜索集合为整个文档中的所有单元 </param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceFilter.Filterfaces(Autodesk.Revit.DB.Document,System.Collections.Generic.ICollection{Autodesk.Revit.DB.ElementId},eZRvt.FaceWall.FaceOptions)">
+            <summary>
+             从整个文档中的指定集合中 按指定的过滤选项 搜索面层对象
+            </summary>
+            <param name="doc"></param>
+            <param name="elementIds"> 如果其值为null，则表示过滤集合为整个文档中的所有单元 </param>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceFilter.GetFaceTypes(System.Collections.Generic.IEnumerable{eZRvt.FaceWall.WallFace})">
+            <summary>
+            从给出的面层对象集合中，获得所有的面层类型（比如涂料、防水等）
+            </summary>
+            <param name="faces"></param>
+            <returns> 返回的面层类型集合中，没有相同的项。 </returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.ExEventHandler.Execute(Autodesk.Revit.UI.UIApplication)">
+            <summary>
+            Called to execute an API command and update the UI after the command is finished.
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.ModelessCommandId.DrawFace">
+            <summary>
+            根据设置信息绘制新的面层
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.ModelessCommandId.SelectAll">
+            <summary>
+            过滤选择的单元集合或者整个文档中的面层单元
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.ModelessCommandId.Filter">
+            <summary>
+            根据指定的类型等信息，来过滤选择的单元中的面层单元
+            </summary>
+        </member>
+        <member name="T:eZRvt.FaceWall.FaceOptions">
+            <summary>
+            进行面层的绘制或者过滤时的设置参数
+            </summary>
+        </member>
+        <member name="P:eZRvt.FaceWall.FaceOptions.SurfaceThickness">
+            <summary>
+            面层的厚度，单位为米
+            </summary>
+        </member>
+        <member name="P:eZRvt.FaceWall.FaceOptions.Color">
+            <summary> 面层对象在Revit中要显示的颜色 </summary>
+        </member>
+        <member name="P:eZRvt.FaceWall.FaceOptions.CategoryId">
+            <summary> 面层对象在Revit中所属的类别 </summary>
+        </member>
+        <member name="P:eZRvt.FaceWall.FaceOptions.FaceType">
+            <summary> 面层的类型，比如防水、抹灰等 </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.FaceOptions.IncludeSameNormal">
+            <summary>
+            如果为true，则在绘制面层时，要将选择的单元中，所有与选定的面同法向的面上均绘制出面层
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.FaceOptions.ExcludeFaceElement">
+            <summary>
+            如果为true，则在选择表面时排除面层对象
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.FaceOptions.MultiFaces">
+            <summary>
+            如果为true，则先选择多个面，再将对应的面层Solid存储在一个directShape对象中
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.FaceOptions.UnionInnerSolids">
+            <summary>
+            当一个面层对象中有多个实体时，是否将将这些实体进行可能的组合。
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.FaceOptions.#ctor(System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.Double,Autodesk.Revit.DB.Color,Autodesk.Revit.DB.ElementId,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="doc">面层的厚度，单位为米</param>
+            <param name="includeSameNormal"> 如果为true，则在绘制面层时，要将选择的单元中，所有与选定的面同法向的面上均绘制出面层 </param>
+            <param name="excludeFace"> 如果为true，则在选择表面时排除面层对象 </param>
+            <param name="multiFaces"> 如果为true，则先选择多个面，再将对应的面层Solid存储在一个directShape对象中 </param>
+            <param name="surfaceThickness">面层的厚度，单位为米</param>
+            <param name="color"> 面层对象在Revit中要显示的颜色 </param>
+            <param name="categoryId"> 面层对象在Revit中所属的类别 </param>
+            <param name="faceType"> 面层的类型，比如防水、抹灰等 </param>
+        </member>
+        <member name="F:eZRvt.FaceWall.FormAddFaceType.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.FormAddFaceType.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:eZRvt.FaceWall.FormAddFaceType.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:eZRvt.FaceWall.MpFaceOptions">
+            <summary>
+            UC1.xaml 的交互逻辑
+            </summary>
+            <summary>
+            MpFaceOptions
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.UniqueObject(Autodesk.Revit.UI.UIControlledApplication)">
+            <summary>
+            Panel 的激活（全局中只有此一个Panel）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.UniqueObject(Autodesk.Revit.UI.UIApplication)">
+            <summary>
+            Panel 的激活（全局中只有此一个Panel）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="F:eZRvt.FaceWall.MpFaceOptions.rvtHwnd">
+            <summary>
+            Revit的主窗口的句柄。
+            当 Revit中有其他的弹出窗口时，MainWindowHandle属性所指的可能就不是Revit程序的那个大窗口了。
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.AsWindows">
+            <summary>
+            当此界面作为一个单独窗口时的设置
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.AsPage">
+            <summary>
+            当此界面作为Revit中的Dockable Pane时的设置
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.EnableCommands(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="status"> True 表示启用，false 表示禁用 </param>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.Autodesk#Revit#UI#IDockablePaneProvider#SetupDockablePane(Autodesk.Revit.UI.DockablePaneProviderData)">
+            <summary>
+            此函数由uiApp.RegisterDockablePane时自动被调用。
+            </summary>
+            <param name="data"> 通过给此 data 实例的属性赋值，来确定要注册的 DockablePane 的样式 </param>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.GetFaceOptions">
+            <summary>
+            从界面中获取面层的设置选项信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.MpFaceOptions.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:eZRvt.FaceWall.WallFace.#ctor(Autodesk.Revit.DB.DirectShape)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="faceElement">请自行确保 faceElement 所对应的单元是一个面层对象</param>
+        </member>
+        <member name="M:eZRvt.FaceWall.WallFace.IsWallFace(Autodesk.Revit.DB.Element,eZRvt.FaceWall.WallFace@)">
+            <summary>
+            获取面层对象的标识符。正常情况下，此参数的值应该是一个常数“CMIE_面层”
+            </summary>
+            <param name="ds">  </param>
+            <param name="wallFace"> 如果此函数返回 true，返回面层对象，如果此函数返回False，则此参数返回 null </param>
+            <returns>如果没有找到此参数，则返回false。</returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.WallFace.IsWallFace(Autodesk.Revit.DB.DirectShape,eZRvt.FaceWall.WallFace@)">
+            <summary>
+            获取面层对象的标识符。正常情况下，此参数的值应该是一个常数“CMIE_面层”
+            </summary>
+            <param name="ds">  </param>
+            <param name="wallFace"> 如果此函数返回 true，返回面层对象，如果此函数返回False，则此参数返回 null </param>
+            <returns>如果没有找到此参数，则返回false。</returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.WallFace.GetFaceType(System.String@)">
+            <summary>
+            获取面层类型，如“防水”
+            </summary>
+            <param name="faceType">提取到的面层类型信息</param>
+            <returns>如果没有找到此参数，则返回false。</returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.WallFace.GetArea(System.Double@)">
+            <summary>
+            获取面层的面积
+            </summary>
+            <param name="area">提取到的面层面积信息</param>
+            <returns>如果没有找到此参数，则返回false。</returns>
+        </member>
+        <member name="M:eZRvt.FaceWall.WallFace.GetVolumn(System.Double@)">
+            <summary>
+            获取面层的体积
+            </summary>
+            <param name="volumn">提取到的面层体积信息</param>
+            <returns>如果没有找到此参数，则返回false。</returns>
+        </member>
     </members>
 </doc>

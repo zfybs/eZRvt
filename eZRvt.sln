@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitStd", "Projects\RevitS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eZRvtRibbonTab", "Projects\eZRvtRibbonTab\eZRvtRibbonTab.csproj", "{64F95E36-0F0D-40DB-B95B-9418428BBB88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eZstd", "..\eZstd\Projects\eZstd\eZstd.csproj", "{FB9B6528-5424-4B7A-AEBA-6733450DC44B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{64F95E36-0F0D-40DB-B95B-9418428BBB88}.Release|x64.Build.0 = Release|x64
 		{64F95E36-0F0D-40DB-B95B-9418428BBB88}.Release|x86.ActiveCfg = Release|Any CPU
 		{64F95E36-0F0D-40DB-B95B-9418428BBB88}.Release|x86.Build.0 = Release|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Debug|x64.ActiveCfg = Debug|x64
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Debug|x64.Build.0 = Debug|x64
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Release|x64.ActiveCfg = Release|x64
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Release|x64.Build.0 = Release|x64
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB9B6528-5424-4B7A-AEBA-6733450DC44B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

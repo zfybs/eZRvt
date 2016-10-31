@@ -61,6 +61,7 @@
       <HintPath>..\..\..\eZstd\bin\eZstd.exe</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="RevitAPI, Version=16.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>D:\Program Files (x86)\Civil Engineering\Autodesk Revit 2016\RevitAPI.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -76,22 +77,95 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\cmd_DebugTest.cs" />
     <Compile Include="Commands\cmd_PickWorkPlane.cs" />
+    <Compile Include="Commands\cmd_ConduitLayout.cs" />
+    <Compile Include="ConduitLayout\ConduitLayout\ConduitFittingMEP.cs" />
+    <Compile Include="ConduitLayout\ConduitLayout\ElbowFamily.cs" />
+    <Compile Include="ConduitLayout\ConduitLayout\MEPConduit.cs" />
+    <Compile Include="ConduitLayout\ConduitLayout\MEPInstance.cs" />
+    <Compile Include="ConduitLayout\ExternalApplication.cs" />
+    <Compile Include="Commands\cmd_HideConduit.cs" />
+    <Compile Include="ConduitLayout\HideConduits\ConduitLevelFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConduitLayout\HideConduits\ConduitLevelFilter.Designer.cs">
+      <DependentUpon>ConduitLevelFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConduitLayout\HideConduits\FilterOption.cs" />
     <Compile Include="DllActivator_eZRvt.cs" />
+    <Compile Include="Commands\cmd_DrawFace.cs" />
+    <Compile Include="GlobalSettings\ConduitLayoutParameters.cs" />
+    <Compile Include="GlobalSettings\ProjectPath.cs" />
+    <Compile Include="GlobalSettings\FaceWallParameters.cs" />
+    <Compile Include="FaceWall\FaceDrawer.cs" />
+    <Compile Include="FaceWall\FaceFilter.cs" />
+    <Compile Include="FaceWall\FaceOptionForm\ExEventHandler.cs" />
+    <Compile Include="FaceWall\FaceOptionForm\FaceOptions.cs" />
+    <Compile Include="FaceWall\FaceOptionForm\FormAddFaceType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FaceWall\FaceOptionForm\FormAddFaceType.Designer.cs">
+      <DependentUpon>FormAddFaceType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FaceWall\FaceOptionForm\MpFaceOptions.xaml.cs">
+      <DependentUpon>MpFaceOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FaceWall\WallFace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ConduitLayout\Setup\ConduitLayout.SHAmc" />
     <None Include="eZRevit.snk" />
+    <None Include="FaceWall\Setup\FaceWall.SHAmc" />
+    <None Include="FaceWall\软件著作权\中机国际贴面工具软件代码.docx" />
+    <None Include="FaceWall\软件著作权\中机国际贴面工具软件使用说明.docx" />
+    <None Include="FaceWall\软件著作权\申请表%28中机国际贴面工具%29.doc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="FaceWall\FaceOptionForm\MpFaceOptions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ConduitLayout\ConduitLayout.addin" />
+    <Content Include="ConduitLayout\Setup\ConduitLayout.ico" />
+    <Content Include="ConduitLayout\Setup\SetupFile\bin\ConduitLayout-32.png" />
+    <Content Include="ConduitLayout\Setup\SetupFile\bin\ConduitLayout.dll" />
+    <Content Include="ConduitLayout\Setup\SetupFile\bin\Filter-32.png" />
+    <Content Include="ConduitLayout\Setup\SetupFile\ConduitLayout.addin" />
+    <Content Include="FaceWall\FaceWall.addin" />
+    <Content Include="FaceWall\Setup\DrawFace.ico" />
+    <Content Include="FaceWall\Setup\SetupFiles\bin\DrawFace.png" />
+    <Content Include="FaceWall\Setup\SetupFiles\bin\FaceWall.dll" />
+    <Content Include="FaceWall\Setup\SetupFiles\bin\FaceWallHelper.pdb" />
+    <Content Include="FaceWall\Setup\SetupFiles\bin\参数.txt" />
+    <Content Include="FaceWall\Setup\SetupFiles\FaceWall.addin" />
+    <Content Include="FaceWall\Setup\SetupFiles\PE-facewall.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConduitLayout\HideConduits\ConduitLevelFilter.resx">
+      <DependentUpon>ConduitLevelFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FaceWall\FaceOptionForm\FormAddFaceType.resx">
+      <DependentUpon>FormAddFaceType.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SmallTools\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

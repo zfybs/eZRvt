@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+<AddIn Type="Application">
+  <Name>ExternalApplication</Name>
+  <Assembly>C:\ProgramData\Autodesk\Revit\Addins\2016\FaceWall\FaceWall.dll</Assembly>
+  <ClientId>19A9FC15-6D44-4117-8A9D-3694C9654698</ClientId>
+  <FullClassName>ConduitLayout.ExternalApplication</FullClassName>
+  <VendorId>ADSK</VendorId>
+  <VendorDescription>Autodesk, www.autodesk.com</VendorDescription>
+</AddIn>
+</RevitAddIns>

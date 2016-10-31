@@ -121,6 +121,8 @@
   <ItemGroup>
     <Compile Include="Curves\ContiguousCurveChain.cs" />
     <Compile Include="Curves\CurvesConverter.cs" />
+    <Compile Include="ColorUtils.cs" />
+    <Compile Include="MEP\MEPHelper.cs" />
     <Compile Include="Selector\Selector.cs" />
     <Compile Include="Geometry\SurfaceTriangulator.cs" />
     <Compile Include="Selector\SelectorFilters.cs" />

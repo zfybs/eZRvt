@@ -372,6 +372,18 @@
         <member name="M:RevitStd.Curves.ModelCurvesDrawer.InquireUndo">
             <summary> 询问用户是否要撤消操作 </summary>
         </member>
+        <member name="T:RevitStd.ColorConverter">
+            <summary> 与 Revit中的颜色相关的操作 </summary>
+        </member>
+        <member name="M:RevitStd.MEP.MEPHelper.FilterConnectors(System.Collections.Generic.IEnumerable{Autodesk.Revit.DB.Connector})">
+            <summary> 判断 Connector 对象是否可以用来进行 线管 到 配电箱 的连接件 </summary>
+        </member>
+        <member name="M:RevitStd.MEP.MEPHelper.FilterConnectors(Autodesk.Revit.DB.ConnectorSet)">
+            <summary> 判断 Connector 对象是否可以用来进行 线管 到 配电箱 的连接件 </summary>
+        </member>
+        <member name="M:RevitStd.MEP.MEPHelper.IsConnector(Autodesk.Revit.DB.Connector)">
+            <summary> 判断 Connector 对象是否可以用来进行 线管 到 配电箱 的连接件 </summary>
+        </member>
         <member name="T:RevitStd.Selector.Selector">
             <summary> Revit界面的选择器，会触发 uidoc.Selection.PickObject()等方法 </summary>
         </member>
@@ -921,22 +933,10 @@
             <remarks>提示: 参数过滤条件可能比其他的类型过滤条件要快，但是这要视条件而定。毕竟这是一个慢过，使用时请按照过滤标准的复杂程度而异。</remarks>
         </member>
         <member name="T:RevitStd.RvtTools">
-            <summary>
-            Revit中的一些常规性操作工具
-            </summary>
-            <remarks></remarks>
-        </member>
-        <member name="M:RevitStd.RvtTools.GetOldWDefinitionGroup(Autodesk.Revit.ApplicationServices.Application)">
-            <summary>
-            获取外部共享参数文件中的参数组“OldW”，然后可以通过DefinitionGroup.Definitions.Item(name As String)来索引其中的共享参数，
-            也可以通过DefinitionGroup.Definitions.Create(name As String)来创建新的共享参数。
-            </summary>
-            <param name="app"></param>
+            <summary> Revit中的一些常规性操作工具 </summary>
         </member>
         <member name="M:RevitStd.RvtTools.Undo">
-            <summary>
-            撤消 Revit 的操作
-            </summary>
+            <summary> 撤消 Revit 的操作 </summary>
         </member>
         <member name="M:RevitStd.RvtTools.FormatTimeToMinite(System.DateTime)">
             <summary> 将时间数值转换为字符串，其显示精度为分钟 </summary>
