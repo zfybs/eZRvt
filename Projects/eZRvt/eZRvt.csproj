@@ -58,17 +58,17 @@
   <ItemGroup>
     <Reference Include="eZstd, Version=2.0.0.0, Culture=neutral, PublicKeyToken=1050b0febcfcb8d2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\eZstd\bin\eZstd.exe</HintPath>
+      <HintPath>..\..\..\eZstd\bin\eZstd.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RevitAPI, Version=16.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>D:\Program Files (x86)\Civil Engineering\Autodesk Revit 2016\RevitAPI.dll</HintPath>
+      <HintPath>C:\Softwares\Civil Engineering\Autodesk Revit 2016\RevitAPI.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIUI">
-      <HintPath>D:\Program Files (x86)\Civil Engineering\Autodesk Revit 2016\RevitAPIUI.dll</HintPath>
+      <HintPath>C:\Softwares\Civil Engineering\Autodesk Revit 2016\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitStd, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">

@@ -60,11 +60,11 @@
     <Reference Include="mscorlib" />
     <Reference Include="PresentationCore" />
     <Reference Include="RevitAPI">
-      <HintPath>D:\Program Files (x86)\Civil Engineering\Autodesk Revit 2016\RevitAPI.dll</HintPath>
+      <HintPath>C:\Softwares\Civil Engineering\Autodesk Revit 2016\RevitAPI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPIUI">
-      <HintPath>D:\Program Files (x86)\Civil Engineering\Autodesk Revit 2016\RevitAPIUI.dll</HintPath>
+      <HintPath>C:\Softwares\Civil Engineering\Autodesk Revit 2016\RevitAPIUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
