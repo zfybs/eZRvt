@@ -1,5 +1,5 @@
-﻿Imports System.Xml
-Imports System.IO
+﻿Imports System.IO
+Imports System.Xml
 
 
 Public Class RefProject
@@ -19,6 +19,7 @@ Public Class RefProject
     Public Property ProjectFilePath As String
     '
     Private F_xmlDoc As XmlDocument
+
     Private Property xmlDoc As XmlDocument
         Get
             Return F_xmlDoc
@@ -99,5 +100,4 @@ Public Class RefProject
     Public Sub Save()
         xmlDoc.Save(ProjectFilePath)
     End Sub
-
 End Class
