@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="LastDllPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\Program Files (x86)\Civil Engineering\Autodesk Revit 2016</Value>
+    </Setting>
+    <Setting Name="LastSolutionPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\Software\Revit\RevitDevelop\OldW\OldW.sln</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
